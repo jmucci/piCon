@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>piCon Home Automation</title>
+	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.css" type="text/css" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.brown-orange.min.css">	
+	
+	<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js" type="text/javascript"></script>
+	<script   src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+	
+    <script   src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.1.1/sprintf.js"></script>
+    <script   src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+	<script  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js" ></script>	
+	<script   src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.js"  type="text/javascript"></script>
+	<script   src="https://cdnjs.cloudflare.com/ajax/libs/ractive/1.0.0-build-30/ractive.js"></script> 
+	
+	
+</head>
+
+<body>
+
+<script id="ract-gridCell-template" type='text/ractive'>
+	<div id="{{ colID }}-target"  class="gridsquare  {{ breakRowClass }}">
+	
+			<!-- column of item for go here -->
+
+	</div>
+</script>
+
+
+<script id="widget-upDown-template" type='text/ractive'>
+	
+			<div id="{{ itemID }}-widget" style="border: 1px solid rgb(255,171,64); float: left;">
+				<div class="widgetTarget-UP" style="float: left;">
+					 <!-- buttonUP button goes here -->
+				</div>
+				<p style="float: left;" class="piCon-label" >{{ text }}</p>
+				<div class="widgetTarget-DOWN" style="float: left;">
+					 <!-- buttonDOWN button goes here -->
+				</div>
+				<br style="clear: both;" />
+			</div>
+			<br style="clear: both;" />
+</script>
+
+
+
+
+<script id="widget-cursorNavigation-template" type='text/ractive'>
+	
+			<div id="{{ itemID }}-widget" >
+			<table class="piCon-table">
+				<tr><!-- row 1 col 1 -->
+				<td class="widgetTarget-menu" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+			
+				<!-- row 1 col 2 -->
+				<td class="widgetTarget-cursorup" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				
+				<!-- row 1 col 3 -->
+				<td class="widgetTarget-UNUSED" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				</tr>
+				<tr>
+				<!-- row 2 col 1 -->
+				<td class="widgetTarget-cursorLeft" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+			
+				<!-- row 2 col 2 -->
+				<td class="widgetTarget-done" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				
+				<!-- row 2 col 3 -->
+				<td class="widgetTarget-cursorRight" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				</tr>
+				<tr>
+				<!-- row 3 col 1 -->
+				<td class="widgetTarget-UNUSED" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+			
+				<!-- row 3 col 2 -->
+				<td class="widgetTarget-cursordown" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				
+				<!-- row 3 col 3 -->
+				<td class="widgetTarget-UNUSED" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				</tr>
+		</table>
+		</div>
+		
+</script>
+
+
+<script id="widget-mediaTransports-template" type='text/ractive'>
+	
+			<div id="{{ itemID }}-widget" >
+			<table  class="piCon-table">
+				<tr>
+			
+		
+				<td class="widgetTarget-play" >
+					 <!-- widgetTarget button goes here -->
+				</td>		
+				<td class="widgetTarget-stop" >
+					 <!-- widgetTarget button goes here -->
+			
+				<td class="widgetTarget-pause" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+			
+				</tr>
+				
+				<tr>
+				<td class="widgetTarget-reverse" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+				
+				<td class="widgetTarget-UNUSED" >
+					 &nbsp;<!-- widgetTarget button goes here -->
+				</td>
+				
+				<td class="widgetTarget-forward" >
+					 <!-- widgetTarget button goes here -->
+				</td>
+			
+			
+				</tr>
+		</table>
+		</div>
+		
+</script>
+
+
+
+
+ <!-- mdl-button mdl-js-button  -->
+<script id="ract-button-momentary-template" type='text/ractive'>
+	
+			<div style="padding-right: 3px;">
+			<button id="{{ itemID }}-button" class="{{ myClass() }} mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" on-click="activate" >
+			<i class="material-icons piCon--material-icons">{{ icon }}</i>{{ buttonText() }}
+			<!-- {{#icon }}
+				<img class="{{ myClass() }}" src="{{ icon }}" 
+			{{/icon }} -->
+			</button>
+			</div>
+	
+</script>
+
+<script id="ract-toggle-template" type='text/ractive'>
+
+	<div class="{{ isClickable() }}">
+		<input id="{{ itemID }}-checkbox" class="{{ classId }}-checkbox" type="checkbox" data-handle-width="50" data-label-width="100" />
+	</div>
+
+</script>
+  
+ 
+    <!-- Alert Modal -->
+    <div class="modal fade bs-example-modal-sm" id="alertModal" role="dialog">
+        <!-- modalContent-template -->
+    </div>
+    <script id='modalContent-template' type='text/ractive'>
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header"> <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span>{{ mytext }}</span> </h4>
+                </div>
+                <div class="modal-body">
+                    <div id="myAlert" class="alert {{ alertStyle }}" role="alert"> <span><b>{{ mytext }}</b> <br> {{ alertTime }} ( {{ timeAgo }} ago )</span> </div>
+                </div>
+                <div class="modal-footer"> <span class="mdl-badge" data-badge="{{stackCount}}">Alerts</span> <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary" data-dismiss="modal">Close this alert</button> <button id="menuAlertOptions" class="mdl-button mdl-js-button mdl-button--raised mdl-button--icon">
+				<i class="material-icons">more_vert</i>
+			</button>
+                    <ul class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect" data-mdl-for="menuAlertOptions">
+                        <li class="mdl-menu__item" onclick="javascript:clearAlertStack();">Close ALL <span class="mdl-badge" data-badge="{{stackCount}}"></span> &nbsp;Alerts </li>
+                        <li class="mdl-menu__item" onclick="javascript:disableAllAlertsRactive();">Disable Incoming Alerts </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+  
+    <div class="mdl-layout__header-row">
+	 <div class="led-box">
+		<div id="heartbeat-light" class="led-red"></div>
+	</div>
+      <!-- Title -->
+      <span class="mdl-layout-title">Title</span>
+	 
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav id="pageNav-targetV1" class="mdl-navigation mdl-layout--large-screen-only">
+				<!-- pageNav-target -->
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+	  <nav id="pageNav-targetV2" class="mdl-navigation">
+				
+					<!-- pageNav-target -->
+			
+				<script id='pageNav-template' type='text/ractive'>
+				{{#items}}
+
+						<a data-for="{{ id }}-link" href="#" on-click="['pageActivate', @index ]" class="mdl-navigation__link">{{ title }}</a>	
+						
+				{{/items}}
+				</script>
+			</nav>
+	
+	
+
+  </div>
+   <main class="mdl-layout__content">
+			<script id='pageContent-template' type='text/ractive'>
+				{{#items}}
+					<div id="{{ id }}-target" isActive="{{ isActive }}" style="display: {{ isActive ? "" : "none" }};" >
+					 <!-- page content goes here -->
+					</div>
+				{{/items}}
+			</script>
+			<div id="pageContent-target">
+				<!-- pageNav-target -->
+			</div>
+			
+
+        </main>
+</div>
+
+    <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div> 
+		<button class="mdl-snackbar__action" type="button"></button> 
+	</div>
+</body>
+
+
+
+<script>
+    function beep()
+    {
+        var snd = new Audio("data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=");
+        snd.play();
+    }
+    //
+    //  setup socket connection to server
+    //
+    // console.log("connecting to sockets");
+    socket = io.connect('http://192.168.86.204:8080/', {'forceNew':true }); // todo make geenric?
+    var alertStack = [];
+    var alertStackTop;
+    var currentAlertItem = null;
+    var currentServerTimeOffest;
+    var alertElapsedTimeCountisetInterval;
+    var enableAllAlertsRactive = true;
+	
+    // when modal alert is closed
+    $('#alertModal').on('hidden.bs.modal', function()
+    {
+        console.log(' modal closed - popAlert()');
+        popAlert();
+    });
+	
+	
+var pageMaker = function pageMaker() {
+	// private members and functions
+    
+	var pageItems;
+	var currentPageItem;
+	
+	function populatePages(items)
+	{
+		console.log("populatePages");
+		pageItems = items;
+		createPageRactives();
+		preparePages();
+		
+		currentPageItem = findActivePage();
+		setActiveTitle();
+	}
+	
+	function preparePages() {
+		pageItems.forEach(function(page, index)
+			{
+				page.target = page.id + "-target";
+				
+				// prepare containers as needed
+				if(page.style == "grid")
+				{
+					createGrid(page);
+				}
+				
+			});  // end foreach page
+	};
+	
+	function findActivePage(){
+		return _.find(pageItems, function(item) {
+			console.log("findActivePage: " + item.title + "  " + item.isActive);
+			return item.isActive
+		});
+	};
+	
+	function findPageID(id){
+		return _.find(pageItems, function(item) {
+			console.log("findPageID: " + item.title + "  " + item.id);
+			return item.id == id;
+		});
+	};
+	
+	function findIndexOfPageID(id){
+		return _.findIndex(pageItems, function(item) {
+			console.log("findIndexOfPageID: " + item.title + "  " + item.id);
+			return item.id == id;
+		});
+	};
+	
+	function setActiveTitle(){
+		if(currentPageItem != 'undefined')
+		{
+			$("span.mdl-layout-title").text(currentPageItem.title);
+		}
+	};
+	
+    function setActivePage(index) {
+		console.log("setActivePage index: " +  index);
+        pageContentRactive.set('items.*.isActive', false);
+        obj = pageContentRactive.get();
+		currentPageItem = obj.items[index];
+        currentPageItem.isActive = true;
+        pageContentRactive.set(obj);
+		
+		setActiveTitle();
+		
+		// kludge - mdl drawer does not close after selection of page- so close it
+		
+        $(".mdl-layout__drawer").removeClass("is-visible");
+        $(".mdl-layout__obfuscator ").removeClass("is-visible");
+        $("span.mdl-layout-title").text(obj.items[index].title);
+    };
+
+	function createPageRactives() {
+		// page nvaigation View 1
+		pageNavRactiveV1 = new Ractive({
+			template: "#pageNav-template",
+			el: "#pageNav-targetV1",
+			data: {
+				items: pageItems
+			}
+		});
+
+		// page nvaigation View 1
+		pageNavRactiveV2 = new Ractive({
+			template: "#pageNav-template",
+			el: "#pageNav-targetV2",
+			data: {
+				items: pageItems
+			}
+		});
+
+		// page click event handlers
+		pageNavRactiveV1.on('pageActivate', function(event, index) {
+			console.log('pageNavRactive: ' + event.node.dataset.for);
+			setActivePage(index);
+		});
+
+		pageNavRactiveV2.on('pageActivate', function(event, index) {
+			console.log('pageNavRactive: ' + event.node.dataset.for);
+			setActivePage(index);
+		});
+		
+		
+		// page content
+		pageContentRactive = new Ractive({
+			template: "#pageContent-template",
+			el: "#pageContent-target",
+			data: {
+				items: pageItems,
+			}
+		});
+	}; // end createRactives
+	
+	
+	function createGrid(page) {
+			// create the needed  # of rows
+			var colractive;
+			if(page.rows == 0 || page.columns == 0) return;  // no grid specification
+			for(irow = 1; irow <= page.rows; irow++)
+			{
+				// create the needed  # of columns
+				for(icol = 1; icol <= page.columns; icol++)
+				{
+					colractive = new Ractive(
+					{
+						template: "#ract-gridCell-template",
+						append: true,
+						el: $('#'+ page.target),
+						data:
+						{
+							colID: page.id + irow + icol,
+							breakRowClass: (icol == 1 ? "breakRowClass" : "")
+						}
+					});
+				}  // end column creation
+			} // end row creation
+		};
+		
+	// publicly exposed
+	return {
+
+		populatePages: populatePages,
+		setActivePage(pageID) {
+			console.log("setting active page" + pageID );
+			index = findIndexOfPageID(pageID)
+			setActivePage(index);
+		},
+		getItemTarget(item) {
+			target = item.page + "-target" // assume
+			if(item.position)
+			{
+				target = item.page + item.position.row + item.position.col + "-target";
+			}
+			return (target)
+		}
+	}
+
+}();  // self executing
+
+		
+ 
+		
+
+    var alertRactive = new Ractive(
+    {
+        el: "#alertModal",
+        template: "#modalContent-template",
+        data:
+        {
+            mytext: '',
+            timeAgo: '',
+            stackCount: "",
+            alertTime: "",
+            alertStyle: "alert-info"
+        }
+    });
+
+	
+	/*
+    function switchChanged(inputID)
+    {
+        el = $("label[for=" + inputID);
+        if (inputID == 'alertsEnabled-input')
+        {
+			
+            enableAllAlertsRactive = !($(el).hasClass("is-checked"));
+            console.log(inputID + " checked: " + enableAllAlertsRactive);
+            alertsEnabledText = (enableAllAlertsRactive ? "Enabled" : "Disabled");
+            message = "Incoming Alerts are now " + alertsEnabledText;
+            enableAllAlertsRactiveRactive.set(
+            {
+                alertsEnabledText: alertsEnabledText,
+                color: (enableAllAlertsRactive ? "green" : "red")
+            });
+            console.log(message);
+        }
+        var snackbarContainer = document.querySelector('#demo-toast-example');
+        snackbarContainer.MaterialSnackbar.showSnackbar(
+        {
+            message: message
+        });
+    }
+	*/
+	
+/*
+    var enableAllAlertsRactiveRactive = new Ractive(
+    {
+        el: "#alertsEnabled-target",
+        template: "#alertsEnabled-template",
+        data:
+        {
+            alertsEnabledText: 'Enabled',
+            color: 'green',
+        }
+    });
+*/
+
+    function disableAllAlertsRactive()
+    {
+        console.log("disableAllAlertsRactive ");
+        // enableAllAlertsRactive = true;
+        // $("label[for=alertsEnabled-input").addClass( "is-checked" );
+        // $("label[for=alertsEnabled-input").addClass("is-checked");
+        // switchChanged('alertsEnabled-input');
+        // enableAllAlertsRactiveRactive.set({ alertsEnabled: (enableAllAlertsRactive ? "Enabled" : "Disabled") });
+		// el = document.querySelector('.mdl-js-switch').MaterialSwitch;
+		// el.inputElement_.checked = false
+		// document.querySelector('.mdl-js-switch').MaterialSwitch.uncheck();
+		// switchChanged('alertsEnabled-input');
+    }
+
+    function clearAlertStack()
+    {
+        console.log(" clearAlertStack");
+        alertStack.length = 0;
+        $('#alertModal').modal('toggle');
+        clearInterval(alertElapsedTimeCountisetInterval);
+    }
+
+    function popAlert()
+    {
+        if (alertStack.length > 0)
+        {
+            currentAlertItem = alertStack.pop();
+            console.log(' poppoing alert: ' + currentAlertItem.item.name + ' alertStack.lenght: ' + alertStack.length);
+            alertShow(currentAlertItem);
+        }
+        else
+        {
+            console.log(" clearinterval: %d", alertElapsedTimeCountisetInterval);
+            clearInterval(alertElapsedTimeCountisetInterval);
+            currentAlertItem = null;
+        }
+    };
+
+    function getDateTimeDifference(startDate, endDate)
+    {
+        // get total seconds between the times
+        text = "";
+        delta = (startDate - endDate + currentServerTimeOffest) / 1000;
+        // console.log(sprintf(" occured: %s now: %s  delta %d",  new Date(endDate), new Date(startDate), delta));
+        if (delta < 1)
+        {
+            text += sprintf(" %d Seconds", 0);
+            return (text);
+        }
+        // calculate (and subtract) whole days
+        days = Math.floor(delta / 86400);
+        delta -= days * 86400;
+        // calculate (and subtract) whole hours
+        hours = Math.floor(delta / 3600) % 24;
+        delta -= hours * 3600;
+        // calculate (and subtract) whole minutes
+        minutes = Math.floor(delta / 60) % 60;
+        delta -= minutes * 60;
+        // what's left is seconds
+        seconds = delta % 60; // in theory the modulus is not required
+        text = "";
+        if (days > 0) text += sprintf(" %d Days", days);
+        if (hours > 0) text += sprintf(" %d Hours", hours);
+        if (minutes > 0) text += sprintf(" %d Minutes", minutes);
+        if (seconds > 0) text += sprintf(" %d Seconds", seconds);
+        return (text);
+    }
+
+    function alertShow(data)
+    {
+        console.log(" clearinterval: %d", alertElapsedTimeCountisetInterval);
+        clearInterval(alertElapsedTimeCountisetInterval);
+        dateOccured = new Date(data.occuredDateTime);
+        mytext = data.item.name + " has changed to state to [" + (data.item.state ? data.item.onText : data.item.offText) + "]";
+        alertTime = dateOccured.toDateString() + " " + dateOccured.toLocaleTimeString();
+        timeAgo = getDateTimeDifference(new Date(), dateOccured);
+        alertRactive.set(
+        {
+            mytext: mytext,
+            timeAgo: timeAgo,
+            stackCount: alertStack.length + 1,
+            alertTime: alertTime,
+            alertStyle: data.item.modalAlert.style
+        });
+		
+        $("#alertModal").modal(); // show it
+        // update elapsed time every 1 seccond
+        alertElapsedTimeCountisetInterval = setInterval(function()
+        {
+            timeAgo = getDateTimeDifference(new Date(), dateOccured);
+            alertRactive.set(
+            {
+                timeAgo: timeAgo
+            });
+        }, 1000, dateOccured);
+        console.log(" setInerval: %d", alertElapsedTimeCountisetInterval);
+    }
+	
+	
+
+function createButtonMomentaryItem(item) {
+	
+	if (document.getElementById(item.id + '-button'))  { return; } // bail out
+	//else
+	
+	var targetElement;
+	
+	//  this item part of a widget target is widget
+	if(item.widget != null )
+	{
+		console.log("item.widget: " + item.widget);
+		targetElement = $("#" + item.widget.parentItemId + "-widget ." + item.widget.classId);  // NOTE "-widget<space><dot>"
+	}
+	else // NOT in widget - just slap it on the target page
+	{
+		itemTarget = pageMaker.getItemTarget(item);
+		targetElement = $("#" + itemTarget);
+	}
+	
+	// itemTarget = pageMaker.getItemTarget(item);
+	// el = $("#" + itemTarget);
+	
+	 
+	var ractive = new Ractive(
+	{
+		el: targetElement,
+		append: true,
+		template: "#ract-button-momentary-template",
+		data:
+		{
+			itemID: item.id,
+			icon: item.icon,
+			buttonText: function(){
+				if(item.iconStyle == "iconOnly")  { return ''; } // no text
+				else { return (item.state ? item.onText : item.offText); }  // else { return (item.state == 0 ? item.offText : item.onText); }
+			},
+			myClass: function(){
+				cls = "";
+				/*
+				if(item.iconStyle == "iconOnly"  || item.iconStyle == "iconAndText") { cls = 'button-with-image-only'; }
+				if(!item.position) { cls += " button-not-in-grid"}
+				*/
+				return cls;
+			},
+		}
+	});
+
+	// create click event handler
+	
+	
+	if (item.style == 'button-momentary')
+		{
+			ractive.on( 'activate', function ( event ) {
+			console.log('click event on: ' + item.id); // todo coordinate state between client and server - whos boss!
+				socket.emit('userClick',
+				{
+					id: item.id  // know this by closure !!!???!!!
+				}); // todo = can we have callback from serer here
+			    activityLEDBlink(200, 50);
+			});
+		}
+	
+	if (item.style == 'button-navigation')
+		{
+			ractive.on( 'activate', function ( event ) {
+			console.log('click event on: ' + item.id); // todo coordinate state between client and server - whos boss!
+				pageMaker.setActivePage(item.target);
+				activityLEDBlink(200, 50);
+
+			});
+		}
+};
+
+function createWidget(item) {
+	if (document.getElementById(item.id + '-widget'))  { return; } // bail out - todo should look for attribute / text changes and apply
+	//else
+	console.log("createWidget: " + item.id + "  " + item.style);
+	itemTarget = $("#" + pageMaker.getItemTarget(item));
+	
+	var ractive = new Ractive(
+	{
+		el: itemTarget,
+		append: true,
+		template: "#" + item.style + "-template",
+		data:
+		{
+			itemID: item.id,  // todo if we allow items in more that on page - this is a problem!!!!
+			text: item.name
+		}
+	});
+}
+
+function createToggleItem(item) {
+	
+	if (document.getElementById(item.id + '-checkbox'))  { return; } // bail out - todo should look for attribute / text changes and apply
+	//else
+	
+	itemTarget = $("#" + pageMaker.getItemTarget(item));
+	var ractive = new Ractive(
+	{
+		el: itemTarget,
+		append: true,
+		template: "#ract-toggle-template",
+		data:
+		{
+			itemID: item.id,  // -checkbox is appended in template
+			text: item.name,
+			classId: item.classId,  // -checkbox is appended in template
+			isClickable: function(){
+				if(item.style == 'button-toggle')  { return ''; } // allow clicks
+				else { return ("noClick"); } // its a sensor (read only) css class prevents cursor (no click)
+			}
+		}
+	});
+	 
+	console.log("set up BootstrapSwitch properties");
+	el = '#' + item.id + "-checkbox";
+	
+	$(el).bootstrapSwitch();
+	$(el).bootstrapSwitch('onText', item.onText);
+	$(el).bootstrapSwitch('offText', item.offText);
+	$(el).bootstrapSwitch('onColor', item.onColor);
+	$(el).bootstrapSwitch('offColor', item.offColor);
+	$(el).bootstrapSwitch('labelText', item.name);
+	
+	// $(el).bootstrapSwitch('handleWidth', 50);
+	// $(el).bootstrapSwitch('labelWidth',100);
+
+	
+	if (item.state == undefined) { item.state = false; }  // else TODO with toogles of unknow state
+	
+	$(el).bootstrapSwitch('state', item.state, true);  // do not fire change event
+
+	
+
+	// set up click event
+	if(item.style == 'button-toggle') // vs button-sensor (no click)
+	{
+		$(el).on('switchChange.bootstrapSwitch', function (event, state) {
+		console.log('click event on: ' + item.id + ' state: ' + state);
+		socket.emit('userClick',
+				{
+					id: item.id,
+					state: state  // TODO do we have to invert state?
+				});
+				activityLEDBlink(200, 50);
+		});
+	}
+	else // button-sensor (no click)
+	{
+		// $(el).bootstrapSwitch('readonly', true);
+	}
+	
+};
+	
+function activityLEDBlink(duration, pace)
+{
+    // start blinking in 'delay' cycle period	
+    var iv = setInterval(function()
+    {
+			  $("#heartbeat-light").attr('class', 'led-blue');
+
+    }, pace / 2);
+    // Stop blinking after 'duration'
+    setTimeout(function()
+    {
+        clearInterval(iv); // Stop blinking
+			  $("#heartbeat-light").attr('class', 'led-yellow');
+    }, duration);
+};
+
+	
+function createControlItem(item)
+{	
+	if (item.device == 'widget')
+		{
+		createWidget(item);
+		}		
+	if (item.style == 'button-momentary')
+		{
+		createButtonMomentaryItem(item);
+		}
+	if (item.style == 'sensor-toggle')
+		{
+		createToggleItem(item);
+		}
+	if (item.style == 'button-toggle')
+		{
+		createToggleItem(item);
+		}
+	if (item.style == 'button-navigation')
+		{
+		createButtonMomentaryItem(item);
+		}
+		
+};
+
+
+    //
+    // process currentServerTime message fro server - sync with client time
+    //
+	
+	var deadHeartbeatTimer;
+	
+	console.log("connecting to sockets");
+    var socket = io.connect('http://192.168.86.204:8080/', {'forceNew':true }); // todo make geenric?
+
+	socket.on('ping', function(data){
+      if(data)
+		{
+		  // console.log('received heartbeat from server: ' + data.beat);
+		  socket.emit('pong', {beat: data.beat});
+		  $("#heartbeat-light").attr('class', 'led-green');
+		  // cancel deadTimer
+		  clearTimeout(deadHeartbeatTimer);
+		  
+		  // start heartbeat idle time
+		  setTimeout(function()
+			{
+				$("#heartbeat-light").attr('class', 'led-yellow');
+				
+				// start deadTimer
+				 deadHeartbeatTimer = setTimeout(function()
+					{
+						$("#heartbeat-light").attr('class', 'led-red');
+					}, 10000);
+				
+			}, 2000);
+	    }
+	else
+		{
+		 console.log('received heartbeat from server: NO DATA !!!!');
+		}
+    });
+	
+	
+    socket.on('currentServerTime', function(data)
+		{
+			// console.log('got server clocktime');
+			currentServerTimeOffest = new Date(data.currentServerTime) - new Date();
+			console.log('got server clocktime currentServerTimeOffest: ' + currentServerTimeOffest);
+		})
+		
+		
+    socket.on('clientNavigate', function(data)
+		{
+			console.log('clientNavigate to: ' + data.target);
+			activityLEDBlink(200, 50);
+			pageMaker.setActivePage(data.target);
+		})
+				
+		
+   socket.on('pagesInit', function(data)
+		{
+			console.log('got pagesInit');
+			pageMaker.populatePages(data.pageItems);
+		})
+		
+        //
+        // process itemInit messages from server
+        //
+    socket.on('itemInit', function(item)
+    {
+        debugtext = 'itemInit name: ' + item.name + ' style: ' + item.style + ' id: ' + item.id + ' state: ' + item.state + ' onText: ' + item.onText + ' offText: ' + item.offText;
+        console.log(debugtext);
+		var itemTarget;
+		
+		if (!item.page)
+        {
+            item.page = 'pageMISC';
+        }
+		
+		createControlItem(item);
+				
+    });
+    //
+    // process sensorStateChange messages from server
+    //
+	
+	function discete_toggleStateChange(item)
+	{
+	   debugtext = 'discete_toggleStateChange message received: ' + 'id: ' + item.id + ' state: ' + item.state;
+        console.log(debugtext);  // document.getElementById('myP').innerHTML = debugtext;
+        el = '#' + item.id + '-checkbox';
+		
+		$(el).bootstrapSwitch('state', item.state, true);  // true -> do not fire change event
+		activityLEDBlink(200, 50);
+	};
+	
+	function discete_toggleStateChange__2(item)
+	{
+	   debugtext = 'discete_toggleStateChange__2 message received: ' + 'id: ' + item.id + ' state: ' + item.state  + ' classId: ' + item.classId;
+        console.log(debugtext);  // document.getElementById('myP').innerHTML = debugtext;
+        // el = '.' + item.classId + '-checkbox';
+		
+		$( '.' + item.classId + '-checkbox' ).each(function( index ) {
+			console.log( index + ": " + $( this ).text() );
+			$( this ).bootstrapSwitch('state', item.state, true);  // true -> do not fire change event
+			activityLEDBlink(200, 50);
+		});
+	};
+	
+    socket.on('sensorStateChange', function(item)
+    {
+		discete_toggleStateChange__2(item);
+    });
+	
+	socket.on('discete_toggleStateChange', function(item)
+    {
+		discete_toggleStateChange__2(item);
+    });
+
+	//
+    // process toastAlert messages from server
+    //
+    socket.on('toastAlert', function(item)
+    {
+		var notification = document.querySelector('#demo-toast-example');
+		notification.MaterialSnackbar.showSnackbar(
+		  {
+			message: item
+		});
+
+	});
+	
+	
+    //
+    // process modalAlert messages from server
+    //
+    socket.on('modalAlert', function(item)
+    {
+        if (!enableAllAlertsRactive) return; // nothing to do
+        if (currentAlertItem != null) // already got one up - stack this one
+        {
+            alertStack.push(currentAlertItem);
+            console.log('alertStack.push(item): ' + currentAlertItem.item.name + ' stack items: ' + alertStack.length);
+        }
+        currentAlertItem = item;
+        alertShow(currentAlertItem);
+    });
+	
+	
+	socket.on('connect', function() {
+		socket = socket;
+		console.log("client got connect message");
+		$("#heartbeat-light").attr('class', 'led-green');
+		setTimeout(function()
+			{
+				$("#heartbeat-light").attr('class', 'led-yellow');
+			}, 2000);
+
+	});
+	
+	
+	 socket.on('disconnect', function(){
+		console.log("client got disconnect message");
+    });
+	
+</script>
+
+
+	
+	
+</html>
+
+<style type="text/css">
+
+.piCon-table{
+width: 98%;
+}
+ 
+ 
+ 
+.piCon--material-icons{
+
+font-size: 50px;
+}
+
+    body {
+        margin: 4px;
+		
+    }
+    
+
+	
+	.breakRowClass {
+		clear: both;
+	}
+	
+	
+.gridsquare {
+    float:left;
+    position: relative;
+    width: 19%;
+    // padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+    margin:1px;
+    // background-color:#1E1E1E;
+    overflow:hidden;
+}
+
+<!-- .gridcontent {
+    position:absolute;
+    height:90%; /* = 100% - 2*5% padding */
+    width:90%; /* = 100% - 2*5% padding */
+    padding: 5%;
+    
+} -->
+
+/*  For responsive images */
+
+<!-- .gridcontent {
+    width:auto;
+    height:auto;
+    max-height:90%;
+    max-width:100%;
+} -->
+	
+	button.button-with-image-only
+	{
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		height: 100%;
+	}
+	
+	img.button-with-image-only
+	{
+		height: 100%;
+		width: 100%;
+	}
+
+
+<!-- 	img.button-not-in-grid
+	{
+	height: 70px;
+	width: 70px;
+	} -->
+
+	
+	.my-mdl-grid-tight
+	{
+		padding:0
+	}
+	
+		.my-mdl-cell-tight
+	{
+		margin:0
+	}
+	
+	
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; left: 30%}
+	
+	
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+   
+    padding: 8px;
+	padding-left: 16px;
+	}
+	
+	
+    .my-mdl-layout__drawer.is-visible {
+        width: 75%;
+    }
+    
+    .mdl-switch.is-checked .mdl-switch__track {
+        background: rgba(0, 128, 0, 0.25);
+    }
+    
+    .mdl-switch__track {
+        background: rgba(255, 0, 0, 0.25);
+    }
+    
+    .mdl-switch.is-checked .mdl-switch__thumb {
+        background: green;
+    }
+    
+    .mdl-switch__thumb {
+        background: red;
+    }
+    
+    .mdl-button {
+        border-radius: 8px;
+		margin: 3px;
+		width: 98%;
+		height: 60px;
+		line-height: inherit;
+		min-width: 100px;
+		font-size: 20px;
+    }
+    
+    .my-mdl-switch {
+        margin-left: 15px;
+    }
+    
+    .mdl-layout__content {
+        margin-top: 5px;
+		max-width: 450px;
+    }
+    
+    .glyphicon-menu-hamburger {
+        font-size: 20px;
+        color: white;
+    }
+    
+    .navbar {
+        position: relative;
+        min-height: 0px;
+        margin-bottom: 6px;
+    }
+    
+    .btn-group-vertical {
+        padding-left: 28px;
+    }
+    
+    .toggle.btn {
+        min-width: 80px;
+    }
+    
+    .toggle.btn {
+        min-width: 80px;
+    }
+	
+	.bootstrap-switch-label {
+	height: 60px;
+	font-size: 20px;
+	}
+	
+	
+	.piCon-label{
+	margin: 20px 0 0;
+	font-size: 20px;
+		}
+		
+		
+<!-- 	
+	.bootstrap-switch .bootstrap-switch-label {
+	font-size: 20px;
+	}
+	
+	.bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-handle-off {
+		font-size: 20px;
+	}
+	
+     -->
+    <!-- .glyphicon {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        color: white;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    -->
+    /* makes them "read only" */
+    
+    .noClick {
+        pointer-events: none;
+    }
+    
+    .panel-body {
+        padding: 2px;
+		max-width: 600px;
+    }
+    
+    .panel {
+        margin-bottom: 3px;
+    }
+	
+	
+	button > p {
+	
+	line-height: 12px;
+	margin: 3px 0 3px;
+	
+	
+	}
+	
+	
+	.table { display: table; }
+.row { display: table-row; }
+.cell { display: table-cell; }
+
+.bootstrap-switch .bootstrap-switch-label {
+background-color: rgb(255,171,64);
+}
+
+.bootstrap-switch {
+border-radius: 8px;
+ margin: 3px;
+}
+
+	
+	.led-box {
+float: left;
+    margin-right: 3px;
+    margin-left: -18px;
+}
+.led-red {
+  margin: 0 auto;
+  width: 12px;
+  height: 12px;
+  background-color: #F00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px, rgba(255, 0, 0, 0.5) 0 2px 12px
+  }
+	
+	.led-green {
+  margin: 0 auto;
+  width: 12px;
+  height: 12px;
+  background-color: #ABFF00;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
+}
+
+.led-yellow {
+  margin: 0 auto;
+  width: 12px;
+  height: 12px;
+  background-color: #FF0;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #808002 0 -1px 9px, #FF0 0 2px 12px;
+  }
+  
+  .led-blue {
+  margin: 0 auto;
+  width: 12px;
+  height: 12px;
+  background-color: #24E0FF;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
+}
+	
+	
+
+	
+</style>

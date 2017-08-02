@@ -1,0 +1,5 @@
+	
+	//	{ name: "DVD Power", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "DVD.POWER" },
+
+	
+	

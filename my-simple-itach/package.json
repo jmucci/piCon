@@ -1,0 +1,82 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "simple-itach",
+        "scope": null,
+        "escapedName": "simple-itach",
+        "name": "simple-itach",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/home/pi"
+    ]
+  ],
+  "_from": "simple-itach@latest",
+  "_id": "simple-itach@0.2.1",
+  "_inCache": true,
+  "_location": "/simple-itach",
+  "_npmUser": {
+    "name": "wafflegolfing",
+    "email": "wafflegolfing@gmail.com"
+  },
+  "_npmVersion": "1.4.21",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "simple-itach",
+    "scope": null,
+    "escapedName": "simple-itach",
+    "name": "simple-itach",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/simple-itach/-/simple-itach-0.2.1.tgz",
+  "_shasum": "28e0eed176240a7cb5a960fcab0affe6cd278f57",
+  "_shrinkwrap": null,
+  "_spec": "simple-itach",
+  "_where": "/home/pi",
+  "author": {
+    "name": "wafflegolfing"
+  },
+  "bugs": {
+    "url": "https://github.com/wafflegolfing/itach/issues"
+  },
+  "dependencies": {},
+  "description": "A simple, unofficial and unsupported, node.js module for sending ir commands to Global Caché's iTach devices.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "28e0eed176240a7cb5a960fcab0affe6cd278f57",
+    "tarball": "https://registry.npmjs.org/simple-itach/-/simple-itach-0.2.1.tgz"
+  },
+  "gitHead": "e3972746dc09d4d667c1d919025c54b5dc9f050b",
+  "homepage": "https://github.com/wafflegolfing/itach",
+  "keywords": [
+    "itach"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "wafflegolfing",
+      "email": "wafflegolfing@gmail.com"
+    }
+  ],
+  "name": "simple-itach",
+  "optionalDependencies": {},
+  "private": false,
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wafflegolfing/itach.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.2.1"
+}
