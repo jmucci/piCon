@@ -1,0 +1,3 @@
+#!/bin/bash
+pkill -c node; node /home/pi/myapp/server.js &
+
