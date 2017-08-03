@@ -208,7 +208,7 @@ var mySSlist = [
 	style: "sensor-toggle", page:"Garage", device: "gpio", pin : "4", direction: "in", edges: "both", activeLow: false,
 	name: "Visitor Detected",  onText : "yes",  offText : "no",
 	onColor : 'warning',  offColor : 'success', 
-	modalAlert: { style:'alert-warning' }, iftttAlert:{ whenValueIs:true }
+	modalAlert: { whenValueIs:true, style:'alert-warning' }, iftttAlert:{ whenValueIs:true }
 	},
 	
 	{ 

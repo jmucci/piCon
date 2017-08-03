@@ -529,7 +529,7 @@ function initGPIOdevice(item)
 			//
 			if (item.modalAlert != undefined && item.state == item.modalAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
 			{
-                console.log("test for alert condition" + item.modalAlert.whenValueIs + "    " + item.state);
+                // console.log("test for alert condition" + item.modalAlert.whenValueIs + "    " + item.state);
 				// broadcast
 				io.sockets.emit('modalAlert',
 				{
