@@ -1,5 +1,5 @@
 {
-  "name": "picon",
+  "name": "@johnmucci/picon",
   "version": "1.0.0",
   "description": "Home Automation on Raspberry Pi",
   "main": "server.js",
