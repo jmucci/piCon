@@ -537,9 +537,8 @@ function initGPIOdevice(item)
 					occuredDateTime: Date()
 				});
 			}
-			//
-			// TODO this should be moved OUT of io connect because these events can fire w/o a client
-			// and notifications via IFTTT (or whatever) are still valid
+            //
+            //
 			//
 			if (item.iftttAlert != undefined && item.state == item.iftttAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
 			{
