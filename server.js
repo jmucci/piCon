@@ -468,7 +468,7 @@ function initCRONdevice(item)
 			});			
 		}
 		
-		(item.iftttAlert != undefined)
+		if(item.iftttAlert != undefined)
 		{
 			sendIFTTTalert(item);
 		}

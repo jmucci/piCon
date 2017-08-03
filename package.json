@@ -1,16 +1,28 @@
 {
-  "name": "myappname",
+  "name": "picon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Home Automation on Raspberry Pi",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "John Mucci",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "~1.0.1",
-    "express": "^4.14.0",
-    "socket.io": "^1.5.0"
+    "async": "^2.5.0",
+    "body-parser": "^1.0.2",
+    "child_process": "^1.0.2",
+    "express": "^4.15.3",
+    "http": "0.0.0",
+    "needle": "^1.6.0",
+    "node-cleanup": "^2.1.2",
+    "omxdirector": "^0.1.2",
+    "ontime": "0.0.3",
+    "path": "^0.12.7",
+    "say": "^0.11.0",
+    "socket.io": "^1.7.4",
+    "sprintf-js": "^1.1.1",
+    "suncalc": "^1.8.0",
+    "underscore": "^1.8.3"
   }
 }
