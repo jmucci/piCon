@@ -1,3 +1,6 @@
 #!/bin/bash
-pkill -c node; node /home/pi/myapp/server.js &
+echo "Doing PULL"
+git pull
+echo "Bouncing Node Server"
+pkill -c node; node /home/pi/picon/server.js &
 
