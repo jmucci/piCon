@@ -14,10 +14,8 @@ var say = require('say');
 var async = require('async');
 var sprintf = require("sprintf-js").sprintf;
 var omx = require('omxdirector');
-// var iTach = require('node-itach');
-// var iTach = require('globalcache').iTach;
-var iTach = require('./my-simple-itach');
 
+var iTach = require('./my-simple-itach');  // my home grown version
 
 // var smartcast = require('vizio-smart-cast');
 var exec = require('child_process').exec;

@@ -320,12 +320,12 @@ var mySSlist = [
 	//
 	{ 
 	style: "button-momentary",  
-	name: "Say something", id: 'Saysomething', soundFile: "upfile_2474029492.mp3"
+	name: "Say something", id: 'Saysomething', soundFile: "/audio/upfile_2474029492.mp3"
 	},
 	
 	{ 
 	style: "button-momentary",   
-	name: "Say something else",  soundFile: "HeythereIseeyouhavepushedthebutton.mp3"
+	name: "Say something else",  soundFile: "/audio/HeythereIseeyouhavepushedthebutton.mp3"
 	},	
 	
 	{ 
