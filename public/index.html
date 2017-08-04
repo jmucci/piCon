@@ -372,6 +372,12 @@ var pageMaker = function pageMaker() {
         pageContentRactive.set(obj);
 		
 		setActiveTitle();
+
+		// tell server what page we are on so on refresh we can return here
+		socket.emit('clientNavigatedToPage',
+				{
+					currentPageItem: currentPageItem
+				});
 		
 		// kludge - mdl drawer does not close after selection of page- so close it
 		
@@ -759,6 +765,7 @@ function createToggleItem(item) {
 	$(el).bootstrapSwitch('state', item.state, true);  // do not fire change event
 
 	
+
 
 	// set up click event
 	if(item.style == 'button-toggle') // vs button-sensor (no click)

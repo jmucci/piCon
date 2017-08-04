@@ -894,41 +894,19 @@ nodeCleanup(function (exitCode, signal) {
 
 
 
-var port = process.env.PORT || 8080; // set our port
+//
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router(); // get an instance of the express Router
-// routeroot - send index page
-router.get('/', function(req, res)
-{
-    var filename = 'indexMDL.html';
-    res.sendFile(filename,
-    {
-        root: __dirname + '/public'
-    }, function(err)
-    {
-        if (err)
-        {
-            console.log(err);
-            res.status(err.status).end();
-        }
-        else
-        {
-            console.log('Sent:', filename);
-        }
-    });
-});
+
 
 router.get('/start', function(req, res)
 {
-    var filename = 'indexMDL.html';
     res.redirect('/?sa=' + ip.address() + '&sp=' + port);
-
 });
 
-
-
 router.get('/public/favicon.ico', function(req, res) {
+console.log("router asked for '/public/favicon.ico'")
   var filename = 'favicon.ico';
   res.sendFile(filename, { root: __dirname + '/public' }, function (err) {
     if (err) {
@@ -1049,27 +1027,9 @@ router.get('/api/LIVINGROOM/DVDTray', function(req, res)
 
 
 
-router.get('/api/LIVINGROOM/AMP/POWEROFF', function(req, res)
-{
-    // transmit IR codes 
-    console.log(irCOMMANDS["amp.POWEROFF"]);
-    AMPremote.send(irCOMMANDS["amp.POWEROFF"], function callback(err)
-    {
-        if (err)
-        {
-            throw new Error(err);
-        }
-        else
-        {
-            // command has been successfully transmitted to your iTach 
-        }
-        res.send('<h2>LIVINGROOM/AMP/POWEROFF</h2>');
-    });
-});
 /* 
 
 // NOT WORKING - TOdo
-
 router.get('/api/RELOAD', function(req, res) {
 
 	console.log("RELOAD");
@@ -1079,26 +1039,15 @@ router.get('/api/RELOAD', function(req, res) {
 });
 
  */
-var thisGPRIO;
-router.get('/api/GPIO/:pin/direction/:direction', function(req, res)
-{
-    res.send('<h2>GPRIO.setup: pin: ' + req.params.pin + ' direction: ' + req.params.direction + '</h2>');
-    thisGPRIO = new Gpio(req.params.pin, req.params.direction);
-    console.log('thisGPRIO init');
-});
-router.get('/api/GPIO/:pin/state/:state', function(req, res)
-{
-    res.send('<h2>GPRIO.write: pin: ' + req.params.pin + ' state: ' + req.params.state + '</h2>');
-    thisGPRIO.writeSync(+req.params.state); // + converts to int
-    console.log('thisGPRIO write');
-    // thisGPRIO.unexport(); 
-});
+
+
 // more routes for our API will happen here
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api 
 app.use('/', router);
 // START THE SERVER
 // =============================================================================
+var port = process.env.PORT || 8080; // set our port
 server.listen(port);
 console.log("Server version: " + myVersion + ".  The magic happens at: " + ip.address() + " on port: " + port);
 // start heartbeat LED
