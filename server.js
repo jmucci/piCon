@@ -1,8 +1,11 @@
 // server.js
+
+var myVersion = "1.0";
 //
 // call the packages we need
 //
 var _ = require('underscore');
+var ip = require('ip');
 var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser');
@@ -1083,12 +1086,12 @@ router.get('/api/GPIO/:pin/state/:state', function(req, res)
 });
 // more routes for our API will happen here
 // REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+// all of our routes will be prefixed with /api 
 app.use('/', router);
 // START THE SERVER
 // =============================================================================
 server.listen(port);
-console.log('Magic happens on port ' + port);
+console.log("Server version: " + myVersion + ".  The magic happens at: " + ip.address() + " on port: " + port);
 // start heartbeat LED
 activityLEDBlink(300, 100);
 // start heartbeat LED
