@@ -919,6 +919,15 @@ router.get('/', function(req, res)
     });
 });
 
+router.get('/start', function(req, res)
+{
+    var filename = 'indexMDL.html';
+    res.redirect('/?sa=' + ip.address() + '&sp=' + port);
+
+});
+
+
+
 router.get('/public/favicon.ico', function(req, res) {
   var filename = 'favicon.ico';
   res.sendFile(filename, { root: __dirname + '/public' }, function (err) {
