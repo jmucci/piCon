@@ -24,7 +24,7 @@ var iTach = require('./my-simple-itach');  // my home grown version
 var exec = require('child_process').exec;
 var needle = require('needle');
 var path = require('path');  // The path module exposes a join method that allows us to chain together variables to create a file path.
-
+var nodeCleanup = require('node-cleanup');
 
 // var cron = require('node-cron'); // much heavier than 'ontime' 
 var ontime = require('ontime')  // https://www.npmjs.com/package/ontime
@@ -727,8 +727,9 @@ function sendIFTTTalert(item)
 	});
 };
 
-//
-// Whenever someone connects to our socket ...
+//  ///////////////////////////////////////////////////////
+//  
+//  Whenever client connects to our socket ...
 //
 var socketbeat = 0;
 var socketbeatInterval;
@@ -737,8 +738,6 @@ io.on('connection', function(socket)
 {
 	
     console.log('A user connected ... socket.id: ' + socket.id + "  "  + socket.handshake.address);
-    // mysocket = socket;
-	
 	
 	if(socketbeatInterval) { clearInterval(socketbeatInterval); }
 	socketbeatInterval = setInterval(function()
@@ -751,14 +750,16 @@ io.on('connection', function(socket)
 		// console.log("sending sock heartbeat: " + socketbeat);
 	}, 5000);
 			
-			
+    //
+    //  emit our server time so client can sync clocks
+    //	
 	socket.emit('currentServerTime',
     {
         currentServerTime: Date()
     });
 	
 	//
-    // emit to client our Page item list - each our IO
+    // emit to client our Page item list
     //	
 	socket.emit('pagesInit',
     {
@@ -766,40 +767,18 @@ io.on('connection', function(socket)
        
     });
 	
-			 
     //
-    // emit to client our control item list - each our IO's
+    // emit to client our control item list - each our contol items
     //
     mySSlist.forEach(function(item, index)
     {
 		//
-		// decide which NOT to process emit init to client
+		// decide which NOT to emit init to client
 		//
-        if (item.enabled == false) return;
+        if (item.enabled == false) return; // config says don't use this
 		if (item.device == "client-navigate") return;  // these stay server side only
 		if (item.device == "cron") return;  // these stay server side only
 	
-        if (item.device == 'gpio')
-        {
-
-        }
-        else if (item.device == 'ir')
-        {
-            // nothing to do ?  todo
-        }
-        else if (item.device == 'rf')
-        {
-            // nothing to do ?  todo
-        }
-		
-		
-        // console.log(' init emmiting : ' + ' name: ' + item.name + ' id: ' + item.id + ' state: ' + item.state);
-	/* 	
-        if (item.category)
-        {
-            item.categoryID = item.category.replace(/\s/g, '');
-        } // remove spaces  todo remove all bad chars
-		 */
         socket.emit('itemInit',
         {
             id: item.id, 
@@ -824,9 +803,11 @@ io.on('connection', function(socket)
         });
     });
 	
-	
+    //  /////////////////////////////////////////////////////////////
+    //  
+    //  Handle messages FROM client
 	//
-    // Whenever someone disconnects this piece of code executed
+    //  on disconnects 
 	//
     socket.on('disconnect', function()
     {
@@ -834,7 +815,7 @@ io.on('connection', function(socket)
     });
 	
 	//
-    // hearbeat from client
+    // on heartbeat from client
 	//
     socket.on('pong', function(data)
     {
@@ -842,9 +823,8 @@ io.on('connection', function(socket)
     });
 	
 	
-	
 	//
-    // clientNavigatedToPage from client
+    // on clientNavigatedToPage from client
 	//
     socket.on('clientNavigatedToPage', function(data)
     {
@@ -856,7 +836,7 @@ io.on('connection', function(socket)
 	});
 	
     //
-    // process userClick  message sent from client
+    // on userClick  message sent from client
     //
     socket.on('userClick', function(data)
     {
@@ -866,33 +846,18 @@ io.on('connection', function(socket)
         item.state = data.state;
         executeCommand(item, socket);
     }); // end socket.on('userClick')
+    
 }); // end io.on('connection')
 
 
-
-// todo - does this even work?
-/* process.on('SIGINT', function()
-{
-    activityLED.unexport(); // todo
-    mySSlist.forEach(function(item, index)
-    {
-        console.log(' Unexproting   pin: ' + item.pin + ' name: ' + item.name + ' id: ' + item.id);
-        item.gpioObj.unexport();
-    });
-});
-process.on('exit', function (){
-  console.log('Goodbye!');
-});
- */
-var nodeCleanup = require('node-cleanup');
-
+//
+//  This runs when this node server exits
+//
 nodeCleanup(function (exitCode, signal) {
     // release resources here before node exits
 	
 	console.log('////////////////////////  Goodbye!');
 });
-
-
 
 //
 // ROUTES FOR OUR API
