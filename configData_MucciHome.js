@@ -355,6 +355,15 @@ var mySSlist = [
 	},
 	
 	{ 
+	style: "button-momentary",  page:'Office',  device: "rf", hostName: "433",  code:"8528385",  p:"410" , t:"1",
+	name: "Office LED Light", icon:"",  iconStyle:"iconAndText"
+	},
+	
+
+
+	// 2017-08-13 15:00:58 - [INFO] rfrx433: 2833921 [pulselength 415, protocol 1]
+
+	{ 
 	style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
 	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
 	},
