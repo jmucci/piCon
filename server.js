@@ -155,7 +155,7 @@ function getRandomInt(min, max)
 function sendRFCommand(code, p, t)
 {
     // console.log("rpi-rf_send -p " + p + " -t " + t + " " + code);
-    exec("rpi-rf_send -p " + p + " -t " + t + " " + code, function(error, stdout, stderr)
+    exec("~/picon/bin/rpi-rf_send -p " + p + " -t " + t + " " + code, function(error, stdout, stderr)
     {
         //console.log('stdout: ' + stdout);
         //console.log('stderr: ' + stderr);
@@ -915,18 +915,7 @@ router.get('/api/LED/Off', function(req, res)
     res.send('<h2>LED (26) is Off</h2>');
     activityLED.writeSync(0);
 });
-router.get('/api/LED/Blink', function(req, res)
-{
-    exec("python /home/pi/test.py", function(error, stdout, stderr)
-    {
-        var mymessage = ' stdout: ' + stdout + ' stderr: ' + stderr
-        if (error !== null)
-        {
-            mymessage += ' exec error: ' + error;
-        }
-        res.send('<h2>LED (Blink)' + mymessage + '</h2>');
-    });
-});
+
 
 router.get('/api/LIVINGROOM/TV/POWERON', function(req, res)
 {
