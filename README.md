@@ -125,6 +125,8 @@ Install Software
     
 	$ cd bin
 	$ chmod +x bounceNode
+    $ chmod +x rpi-rf_send
+    
 
 **Run** piCon server application
 
@@ -138,6 +140,7 @@ Install Software
 **Setup** piCon to boot automatically 
 
     $ cd ~
+    $ sudo npm install forever --global
     $ crontab -e
     -------------------------------------
     @reboot /home/pi/ngrok/ngrok http --subdomain=rpiHome 8080
