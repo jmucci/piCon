@@ -143,6 +143,8 @@ Install Software
     $ sudo npm install forever --global
     $ crontab -e
     -------------------------------------
-    @reboot /home/pi/ngrok/ngrok http --subdomain=rpiHome 8080
-    @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a home/pi/picon/server.js
+    # @reboot /home/pi/ngrok/ngrok http --subdomain=rpiHome 8080
+    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+    @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a /home/pi/picon/server.js
+
 
