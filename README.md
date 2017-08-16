@@ -1,7 +1,10 @@
-#Setting up piCon on fresh Raspberry Pi
-######Much of this is based on [Headless Raspberry Pi Setup](https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0).
+Setting up piCon on fresh Raspberry Pi
+======================================
 
-###Prepare the pi SD card Operating System
+Much of this is based on [Headless Raspberry Pi Setup](https://hackernoon.com/raspberry-pi-headless-install-462ccabd75d0).
+
+Prepare the pi SD card Operating System
+---------------------------------------
 
 [Download](https://www.raspberrypi.org/downloads/raspbian/) RASPBIAN JESSIE **LITE** - Minimal image based on Debian Jessie *(assuming Windows computer)*
 
@@ -15,7 +18,9 @@
 
 **Create 'ssh' file** in boot directory.  Create a new empty file (right-click > new > text document) - name it ‘ssh’ with no extension.  This will cue the pi boot to enable SSH so we can use [PuTTY](http://www.putty.org/) (an SSH and telnet client) session with the the pi. 
 
-###Booting the pi
+Booting the pi
+--------------
+
 **Boot** the pi  with the prepared SD card with a **hard-wired ethernet connection**.
 
 [**Find**  pi's IP address](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) (*like 192.168.86.223*)
@@ -24,7 +29,9 @@
 
 **Sign-in** to the pi (*pi/raspberry*)
 
-###Set up Wifi connection
+Set up Wifi connection
+----------------------
+
 **Add** the Wifi credentials
 
     sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
@@ -55,7 +62,10 @@ Consider reserving this address so that it persists using DHCP reservation.
 
 PuTTY to that address on port 22
 
-###Install Software 
+Install Software
+----------------
+
+ 
 **Update** the system's software
 
     sudo apt-get update
@@ -132,5 +142,4 @@ PuTTY to that address on port 22
     -------------------------------------
     @reboot /home/pi/ngrok/ngrok http --subdomain=rpiHome 8080
     @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a home/pi/picon/server.js
-
 
