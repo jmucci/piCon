@@ -37,8 +37,8 @@ Set up Wifi connection
     sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
     -------------------------------------------------
 	    network={
-	        ssid="meshMucci"
-	        psk="9275cabfed"
+	        ssid="network"
+	        psk="password"
 	        key_mgmt=WPA-PSK
         }
 
