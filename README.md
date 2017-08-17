@@ -128,14 +128,83 @@ Install Software
     $ chmod +x rpi-rf_send
     
 
-**Run** piCon server application
+**Test** piCon server application
 
     $ cd ~/picon
     $ ./bin/bounceNode
 
-**Install** [ngrok](https://ngrok.com/)
+**Install** samba file sharing
 
-... TBD ...
+    $ sudo apt-get install samba samba-common-bin
+	$ sudo cp /dev/null /etc/samba/smb.conf   # clean out existing fluff
+	$ sudo nano /etc/samba/smb.conf
+	------------------------------------------
+	[global]
+	netbios name = {network name} # like piCon3-2 ! EDIT THIS FOR PARTICULAR MACHINE !
+	server string = The Pi File Center
+	workgroup = WORKGROUP
+	hosts allow =
+	socket options = TCP_NODELAY IPTOS_LOWDELAY SO_RCVBUF=65536 SO_SNDBUF=65536
+	remote announce =
+	remote browse sync =
+	
+	[piroot]
+	path = /
+	comment = No comment
+	browsable = yes
+	read only = no
+	valid users =
+	writable = yes
+	guest ok = yes
+	public = yes
+	create mask = 0777
+	directory mask = 0777
+	force user = root
+	force create mode = 0777
+	force directory mode = 0777
+	hosts allow =
+	
+	[pihome]
+	path = /home/pi
+	comment = No comment
+	browsable = yes
+	read only = no
+	valid users =
+	writable = yes
+	guest ok = yes
+	public = yes
+	create mask = 0777
+	directory mask = 0777
+	force user = root
+	force create mode = 0777
+	force directory mode = 0777
+	hosts allow =
+
+	$ sudo smbpasswd -a pi   # set share password
+	$ sudo /etc/init.d/samba restart
+
+**Map** Windows network drive
+    File Explorer > Network > right-click > Map network drive
+    Folder: \\{network name}\pihome
+    Folder: \\{network name}\piroot
+
+
+**Install** [ngrok](httpngrok.com/) tunneling. Typically only for master (www facing) installs.
+
+[**Download** grok](https://ngrok.com/download) for Linux ARM 
+
+**Unzip** ngrok-stable-linux-arm.zip -> ngrok
+**Copy** ngrok to \pihome (via network share)
+
+[**Get** {authtoken}](https://dashboard.ngrok.com/auth)
+
+[**Get** / Create {subdomain}](https://dashboard.ngrok.com/reserved) 
+Hint: {subdomain} == {network name}
+
+	$ cd ~
+	$ ./ngrok authtoken {authtoken}
+	$ ./ngrok http -subdomain={subdomain} 8080 # test http://{subdomain}.ngrok.io/start
+ 
 
 **Setup** piCon to boot automatically 
 
@@ -143,7 +212,8 @@ Install Software
     $ sudo npm install forever --global
     $ crontab -e
     -------------------------------------
-    # @reboot /home/pi/ngrok/ngrok http --subdomain=rpiHome 8080
+    ## to enable ngrok tunneling (only do for master (www facing) installs)
+    # @reboot /home/pi/ngrok/ngrok http -{subdomain}=rpiHome 8080
     PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
     @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a /home/pi/picon/server.js
 
