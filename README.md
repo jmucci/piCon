@@ -108,7 +108,7 @@ Install Software
 
     $ cd ~
     $ sudo apt-get install git
-
+	$ git clone https://github.com/jmucci/piCon.git picon // creates picon folder
     $ cd picon
     $ git config core.filemode false  # so git ignores filemode changes
     $ npm install   # install dependency modules
@@ -215,9 +215,9 @@ Hint: {subdomain} == {network name}
     $ sudo npm install forever --global
     $ crontab -e
     -------------------------------------
+	PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
     ## to enable ngrok tunneling (only do for master (www facing) installs)
-    # @reboot /home/pi/ngrok/ngrok http -{subdomain}=rpiHome 8080
-    PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+    # @reboot /home/pi/ngrok http -subdomain={subdomain} 8080
     @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a /home/pi/picon/server.js
 
 
