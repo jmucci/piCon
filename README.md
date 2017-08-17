@@ -6,28 +6,29 @@ Much of this is based on [Headless Raspberry Pi Setup](https://hackernoon.com/ra
 Prepare the pi SD card Operating System
 ---------------------------------------
 
-[Download](https://www.raspberrypi.org/downloads/raspbian/) RASPBIAN JESSIE **LITE** - Minimal image based on Debian Jessie *(assuming Windows computer)*
+- [Download](https://www.raspberrypi.org/downloads/raspbian/) RASPBIAN JESSIE **LITE** - Minimal image based on Debian Jessie *(assuming Windows computer)*
 
-**Save** the download file (similar to this):  *2017-07-05-raspbian-jessie-lite.**zip***
+- **Save** the download file (similar to:  *2017-07-05-raspbian-jessie-lite.**zip***)
 
-**Unzip** the file to expose the **.img** file:  *2017-07-05-raspbian-jessie-lite.**img**
+- **Unzip** the file to expose the **.img** file (*2017-07-05-raspbian-jessie-lite.**img***)
 
-**Write** the .img file to SD card using tool like [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) or [Etcher](https://etcher.io/)
 
-**Mount** the SD card.  Windows will assign a drive letter to the boot partition like *boot(E:)* for example.
+- **Write** the .img file to SD card using tool like [Win32 Disk Imager](https://sourceforge.net/projects/win32diskimager/) or [Etcher](https://etcher.io/)
 
-**Create 'ssh' file** in boot directory.  Create a new empty file (right-click > new > text document) - name it ‘ssh’ with no extension.  This will cue the pi boot to enable SSH so we can use [PuTTY](http://www.putty.org/) (an SSH and telnet client) session with the the pi. 
+- **Mount** the SD card.  Windows will assign a drive letter to the boot partition like *boot(E:)* for example.
+
+- **Create 'ssh' file** in boot directory.  Create a new empty file (right-click > new > text document) - name it ‘ssh’ with no extension.  This will cue the pi boot to enable SSH so we can use [PuTTY](http://www.putty.org/) (an SSH and telnet client) session with the the pi. 
 
 Booting the pi
 --------------
 
-**Boot** the pi  with the prepared SD card with a **hard-wired ethernet connection**.
+- **Boot** the pi  with the prepared SD card with a **hard-wired ethernet connection**.
 
-[**Find**  pi's IP address](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) (*like 192.168.86.223*)
+- [**Find**  pi's IP address](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) (*like 192.168.86.223*)
 
-**PuTTY** to that address on port 22 - you may see security warnings ...
+- **PuTTY** to that address on port 22 - you may see security warnings ...
 
-**Sign-in** to the pi (*pi/raspberry*)
+- **Sign-in** to the pi (*pi/raspberry*)
 
 Set up Wifi connection
 ----------------------
@@ -37,8 +38,8 @@ Set up Wifi connection
     sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
     -------------------------------------------------
 	    network={
-	        ssid="network"
-	        psk="password"
+	        ssid="{wifi network}"
+	        psk="{network password}"
 	        key_mgmt=WPA-PSK
         }
 
@@ -50,21 +51,20 @@ Set up Wifi connection
     was: iface wlan0 inet manual
     change to: iface wlan0 inet dhcp
 
-**Rename** the pi.
+**Rename** the pi a {network name}
 
     sudo nano /etc/hostname 
     sudo nano /etc/hosts
 
-**Reboot** the RPI (**without ethernet cable**) on WiFi network
+**Reboot** the RPI (**without ethernet cable**) now on WiFi network
 
 [**Find** the pi's IP address](https://www.raspberrypi.org/documentation/remote-access/ip-address.md) (*like 192.168.86.224*)
 Consider reserving this address so that it persists using DHCP reservation.
 
-PuTTY to that address on port 22
+PuTTY to that IP address on port 22
 
 Install Software
 ----------------
-
  
 **Update** the system's software
 
@@ -74,13 +74,10 @@ Install Software
 
 **Find** the pi's processor architecture
 	
-
     cat /proc/cpuinfo
     # for pi0 - ARMv6
     # for pi3 - ARMv7
     # Node install is dependence on CPU architecture
-
-
 
 **Install** [Node](https://nodejs.org/dist/latest/) Distribution
 
@@ -134,6 +131,7 @@ Install Software
     $ ./bin/bounceNode
 
 **Install** samba file sharing
+----------------------
 
     $ sudo apt-get install samba samba-common-bin
 	$ sudo cp /dev/null /etc/samba/smb.conf   # clean out existing fluff
@@ -179,7 +177,7 @@ Install Software
 	force create mode = 0777
 	force directory mode = 0777
 	hosts allow =
-
+	------------------------------------------
 	$ sudo smbpasswd -a pi   # set share password
 	$ sudo /etc/init.d/samba restart
 
@@ -189,22 +187,27 @@ Install Software
     Folder: \\{network name}\piroot
 
 
-**Install** [ngrok](httpngrok.com/) tunneling. Typically only for master (www facing) installs.
+**Install** [ngrok](httpngrok.com/) tunneling. 
+----------------------
+Typically only for master (www facing) installs.
 
-[**Download** grok](https://ngrok.com/download) for Linux ARM 
+- [**Download** grok](https://ngrok.com/download) for Linux ARM 
 
-**Unzip** ngrok-stable-linux-arm.zip -> ngrok
-**Copy** ngrok to \pihome (via network share)
+- **Unzip** ngrok-stable-linux-arm.zip -> ngrok
+- **Copy** ngrok to \pihome (via network share)
 
-[**Get** {authtoken}](https://dashboard.ngrok.com/auth)
+- [**Get** {authtoken}](https://dashboard.ngrok.com/auth)
 
-[**Get** / Create {subdomain}](https://dashboard.ngrok.com/reserved) 
+- [**Get** / Create {subdomain}](https://dashboard.ngrok.com/reserved) 
 Hint: {subdomain} == {network name}
 
+
 	$ cd ~
+
 	$ ./ngrok authtoken {authtoken}
+
 	$ ./ngrok http -subdomain={subdomain} 8080 # test http://{subdomain}.ngrok.io/start
- 
+
 
 **Setup** piCon to boot automatically 
 
