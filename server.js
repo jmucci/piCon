@@ -6,6 +6,7 @@ var myVersion = "1.0";
 //
 var _ = require('underscore');
 var ip = require('ip');
+var os = require('os')
 var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser');
@@ -1003,7 +1004,7 @@ app.use('/', router);
 // =============================================================================
 var port = process.env.PORT || 8080; // set our port
 server.listen(port);
-console.log("Server version: " + myVersion + ".  The magic happens at: " + ip.address() + " on port: " + port);
+console.log("Server version: " + myVersion + ".  The magic happens on: " + os.hostname() + " at  "  + ip.address() + " on port: " + port);
 // start heartbeat LED
 activityLEDBlink(300, 100);
 // start heartbeat LED
