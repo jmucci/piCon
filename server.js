@@ -51,10 +51,14 @@ app.use(bodyParser.urlencoded(
 app.use(bodyParser.json());
 //
 //
-console.log("process.env.PICON_CONFIGDATA_FILEPATH: " + process.env.PICON_CONFIGDATA_FILEPATH);
+/* console.log("process.env.PICON_CONFIGDATA_FILEPATH: " + process.env.PICON_CONFIGDATA_FILEPATH);
 process.env.PICON_CONFIGDATA_FILEPATH = "./configData_MucciHome";
 // var configData = require('./configData.js
 var configData = require(process.env.PICON_CONFIGDATA_FILEPATH);
+ */
+
+console.log("Loading configuration file: " + "./configurations/" + os.hostname());
+var configData = require("./configurations/" + os.hostname());
 
 var pageItems = configData.pageItems;
 var clientsCurrentPage = [];
