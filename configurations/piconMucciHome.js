@@ -14,7 +14,8 @@ exports.irDevices = irDevices;
 var httppostDevices = [
 	{	id: "RokuLivingRoom", hostAddress:  'http://192.168.86.35:8060' },
 	{	id: "RokuBedRoom", hostAddress:  'http://192.168.86.36:8060' },
-	{	id: "IFTTT", hostAddress:  'https://maker.ifttt.com/trigger' }
+	{	id: "IFTTT", hostAddress:  'https://maker.ifttt.com/trigger' },
+	{	id: "piconMucciGarage", hostAddress:  'http://piconMucciGarage:8080' }
 ]
 exports.httppostDevices = httppostDevices;
 
@@ -38,7 +39,11 @@ var httppostCOMMANDS = {
 	"roku.Backspace": "/keypress/Backspace",
 	"roku.Search": "/keypress/Search",
 
-	"IFTTT.piConEvent": "/piConEvent/with/key/dh5BVMQuljyTGGBNSKzZUF"
+	"IFTTT.piConEvent": "/piConEvent/with/key/dh5BVMQuljyTGGBNSKzZUF",
+
+	"piconMucciGarage.OutLetON": "/api/Outlet/ON",
+	"piconMucciGarage.OutLetOFF": "/api/Outlet/OFF"
+
 };
 exports.httppostCOMMANDS = httppostCOMMANDS;
 
@@ -338,22 +343,40 @@ var mySSlist = [
 	// radio RF controls (code, p, t)
 	//
 
+	{ 
+	style: "button-momentary", page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Home",
+	name: "Roku Home", icon:"/images/Home (Roku).png",  iconStyle:"iconOnly", position: { row:2, col:1 }
+	},
+
 	{
 	name: "Outlet Power", page:['Office', 'Home'],   
 	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerON', offLink: 'OutletPowerOFF', 
 	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
 	},
 
+// NEW HTTP request to piconMucciGarage
 	{ 
-	style: "button-momentary",  /*  page: "Office", */  device: "rf", hostName: "433",  code:"87347",  p:"177" , t:"1",
+	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetON",
 	name: "Outlet Power ON", referLink: 'OutletPowerON'  
 	},
 	
 	{ 
-	style: "button-momentary",  /* page:'Office',  */ device: "rf", hostName: "433",  code:"87356",  p:"177" , t:"1",
+	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetOFF",
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
 	},
+
+/* 	ORGINALS - move to be HTTP request to piconMucciGarage
+	{ 
+	style: "button-momentary",  device: "rf", hostName: "433",  code:"87347",  p:"177" , t:"1",
+	name: "Outlet Power ON", referLink: 'OutletPowerON'  
+	},
 	
+	{ 
+	style: "button-momentary", device: "rf", hostName: "433",  code:"87356",  p:"177" , t:"1",
+	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
+	},
+	 
+*/
 	{ 
 	style: "button-momentary",  page:'Office',  device: "rf", hostName: "433",  code:"8528385",  p:"410" , t:"1",
 	name: "Office LED Light", icon:"",  iconStyle:"iconAndText"
