@@ -902,12 +902,12 @@ router.get('/api/Outlet/OFF', function(req, res)
 
 router.post('/api/Outlet/ON', function(req, res)
 {
-    res.send('<h2>Outlet is ON</h2>');
+	console.log('<h2>Outlet is ON</h2>')
     sendRFCommand("87347", "177", "1");
 });
 router.post('/api/Outlet/OFF', function(req, res)
 {
-    res.send('<h2>Outlet is OFF</h2>');
+	console.log('<h2>Outlet is OFF</h2>')
     sendRFCommand("87356", "177", "1");
 });
 
