@@ -343,29 +343,30 @@ var mySSlist = [
 	// radio RF controls (code, p, t)
 	//
 
-	{ 
-	style: "button-momentary", page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Home",
-	name: "Roku Home", icon:"/images/Home (Roku).png",  iconStyle:"iconOnly", position: { row:2, col:1 }
-	},
-
+	// remote POST version
 	{
-	name: "Outlet Power", page:['Office', 'Home'],   
-	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerON', offLink: 'OutletPowerOFF', 
+	name: "Outlet Power Post", page:['Office', 'Home'],   
+	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerONpost', offLink: 'OutletPowerOFFpost', 
 	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
 	},
 
-// NEW HTTP request to piconMucciGarage
 	{ 
 	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetON",
-	name: "Outlet Power ON", referLink: 'OutletPowerON'  
+	name: "Outlet Power ON", referLink: 'OutletPowerONpost'  
 	},
 	
 	{ 
 	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetOFF",
-	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
+	name: "Outlet Power OFF", referLink: 'OutletPowerOFFpost'  
 	},
 
-/* 	ORGINALS - move to be HTTP request to piconMucciGarage
+	// native version
+	{
+	name: "Outlet Power Native", page:['Office', 'Home'],   
+	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerON', offLink: 'OutletPowerOFF', 
+	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
+	},
+
 	{ 
 	style: "button-momentary",  device: "rf", hostName: "433",  code:"87347",  p:"177" , t:"1",
 	name: "Outlet Power ON", referLink: 'OutletPowerON'  
@@ -376,7 +377,7 @@ var mySSlist = [
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
 	},
 	 
-*/
+
 	{ 
 	style: "button-momentary",  page:'Office',  device: "rf", hostName: "433",  code:"8528385",  p:"410" , t:"1",
 	name: "Office LED Light", icon:"",  iconStyle:"iconAndText"
