@@ -8,24 +8,24 @@ var irDevices = [
 exports.irDevices = irDevices;
 
 //
-// httppostDevices
+// httpDevices
 //
-var httppostDevices = [
+var httpDevices = [
 
-	{	id: "piconMucciMucci", hostAddress:  'http://piconMucciHome:8080' }
+	{	id: "piconMucciMucci", hostAddress:  'http://piconMucciHome:8080', hostVerb: 'get' }
 ]
-exports.httppostDevices = httppostDevices;
+exports.httpDevices = httpDevices;
 
 //
-// httppostCOMMANDS
+// httpCOMMANDS
 //
-var httppostCOMMANDS = {
+var httpCOMMANDS = {
 
 	"piconMucciHome.DoorSensorOn": "/api/DoorSensor/ON",
 	"piconMucciHome.DoorSensorOn": "/api/DoorSensor/OFF"
 
 };
-exports.httppostCOMMANDS = httppostCOMMANDS;
+exports.httpCOMMANDS = httpCOMMANDS;
 
 //
 // irCOMMANDS ... sendir,<connectoraddress module:connector>,<ID>,<frequency>,<repeat>,<offset>,<on1>,

@@ -9,20 +9,20 @@ var irDevices = [
 exports.irDevices = irDevices;
 
 //
-// httppostDevices
+// httpDevices
 //
-var httppostDevices = [
-	{	id: "RokuLivingRoom", hostAddress:  'http://192.168.86.35:8060' },
-	{	id: "RokuBedRoom", hostAddress:  'http://192.168.86.36:8060' },
-	{	id: "IFTTT", hostAddress:  'https://maker.ifttt.com/trigger' },
-	{	id: "piconMucciGarage", hostAddress:  'http://piconMucciGarage:8080' }
+var httpDevices = [
+	{	id: "RokuLivingRoom", hostAddress:  'http://192.168.86.35:8060', hostVerb: 'post' },
+	{	id: "RokuBedRoom", hostAddress:  'http://192.168.86.36:8060', hostVerb: 'post'},
+	{	id: "IFTTT", hostAddress:  'https://maker.ifttt.com/trigger', hostVerb: 'post'},
+	{	id: "piconMucciGarage", hostAddress:  'http://piconMucciGarage:8080', hostVerb: 'get'}
 ]
-exports.httppostDevices = httppostDevices;
+exports.httpDevices = httpDevices;
 
 //
-// httppostCOMMANDS
+// httpCOMMANDS
 //
-var httppostCOMMANDS = {
+var httpCOMMANDS = {
 	"roku.Home": "/keypress/Home",
 	"roku.Right": "/keypress/Right",
 	"roku.Left": "/keypress/Left",
@@ -45,7 +45,7 @@ var httppostCOMMANDS = {
 	"piconMucciGarage.OutLetOFF": "/api/Outlet/OFF"
 
 };
-exports.httppostCOMMANDS = httppostCOMMANDS;
+exports.httpCOMMANDS = httpCOMMANDS;
 
 //
 // irCOMMANDS ... sendir,<connectoraddress module:connector>,<ID>,<frequency>,<repeat>,<offset>,<on1>,
@@ -230,51 +230,51 @@ var mySSlist = [
 	//
 
 	{ 
-	style: "button-momentary", page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Home",
+	style: "button-momentary", page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Home",
 	name: "Roku Home", icon:"/images/Home (Roku).png",  iconStyle:"iconOnly", position: { row:2, col:1 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Back",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Back",
 	name: "Roku Back", icon:"/images/Back (Roku).png", iconStyle:"iconOnly", position: { row:2, col:3 }
 	},	
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Right",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Right",
 	name: "Roku Right", icon:"/images/Nav - Right.png",  iconStyle:"iconOnly", position: { row:3, col:3 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Left",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Left",
 	name: "Roku Left", icon:"/images/Nav - Left.png",   iconStyle:"iconOnly", position: { row:3, col:1 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Up",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Up",
 	name: "Roku Up", icon:"/images/Nav - Up.png",    iconStyle:"iconOnly", position: { row:2, col:2 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Down",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Down",
 	name: "Roku Down", icon:"/images/Nav - Down.png",   iconStyle:"iconOnly", position: { row:4, col:2 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Select",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Select",
 	name: "Roku Select", icon:"/images/OK (Roku).png",   iconStyle:"iconOnly", position: { row:3, col:2 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Play",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Play",
 	name: "Roku Play", icon:"/images/Transports - Play.png",   iconStyle:"iconOnly", position: { row:5, col:2 }
 	},	
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Rev",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Rev",
 	name: "Roku Rev", icon:"/images/Transports - Fast Backward.png",    iconStyle:"iconOnly", position: { row:5, col:1 }
 	},	
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Fwd",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Fwd",
 	name: "Roku Fwd", icon:"/images/Transports - Fast Forward.png",    iconStyle:"iconOnly", position: { row:5, col:3 }
 	},	
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.InstantReplay",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.InstantReplay",
 	name: "Roku InstantReplay", icon:"/images/Replay (Roku).png",   iconStyle:"iconOnly", position: { row:4, col:1 }
 	},
 	{ 
-	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "httppost",  hostName: "RokuLivingRoom", hostCommand:  "roku.Options",
+	style: "button-momentary",  page: 'WatchLivingRoomRoku',   device: "http",  hostName: "RokuLivingRoom", hostCommand:  "roku.Options",
 	name: "Roku Options", icon:"/images/Options (Roku).png",   iconStyle:"iconOnly",  position: { row:4, col:3 }
 	},	
 	// Volume
@@ -351,12 +351,12 @@ var mySSlist = [
 	},
 
 	{ 
-	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetON",
+	style: "button-momentary",  device: "http", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetON",
 	name: "Outlet Power ON", referLink: 'OutletPowerONpost'  
 	},
 	
 	{ 
-	style: "button-momentary",  device: "httppost", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetOFF",
+	style: "button-momentary",  device: "http", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.OutLetOFF",
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFFpost'  
 	},
 

@@ -78,8 +78,8 @@ var clientsCurrentPage = [];
 var irDevices = configData.irDevices;
 var irCOMMANDS = configData.irCOMMANDS;
 
-var httppostDevices = configData.httppostDevices;
-var httppostCOMMANDS = configData.httppostCOMMANDS;
+var httpDevices = configData.httpDevices;
+var httpCOMMANDS = configData.httpCOMMANDS;
 
 // var categoryStyles = configData.categoryStyles;
 
@@ -459,9 +459,9 @@ mySSlist.forEach(function(item, index)
     {
         initIRdevice(item);
     }
-	if (item.device == 'httppost')
+	if (item.device == 'http')
     {
-        inithttppostDevice(item);
+        inithttpDevice(item);
     }
 		
     else
@@ -601,11 +601,13 @@ function initIRdevice(item)
 };
 
 //
-//  init inithttppostDevice item
-//
-function inithttppostDevice(item)
+//  init inithttpDevice item
+//hostVerb
+function inithttpDevice(item)
 {
-	item.hostAddress = myFindId(httppostDevices, item.hostName).hostAddress;
+    device = myFindId(httpDevices, item.hostName);
+    item.hostAddress = device.hostAddress;
+    item.hostVerb = device.hostVerb;
 };
 
 //
@@ -692,15 +694,26 @@ function executeCommand(item, socket)
         sendRFCommand(item.code, item.p, item.t);
     }
 	
-	else if (item.device == 'httppost') 
+	else if (item.device == 'http') 
     {
-			command = item.hostAddress + httppostCOMMANDS[item.hostCommand];
+        command = item.hostAddress + httpCOMMANDS[item.hostCommand];
 			
-	  console.log(sprintf("httppost %s", command));
+        console.log(sprintf("http %s", command));
 
-	   needle.post(item.hostAddress + httppostCOMMANDS[item.hostCommand], '',  function(err, resp)  {
-			  console.log(sprintf("httppost resp: %s err %s", resp, err));
-			});
+        if(item.hostVerb == 'post')
+            {
+                needle.post(item.hostAddress + httpCOMMANDS[item.hostCommand], '',  function(err, resp)  {
+                    console.log(sprintf("httppost resp: %s err %s", resp, err));
+                  });
+            }
+
+        if(item.hostVerb == 'get')
+            {
+                needle.get(item.hostAddress + httpCOMMANDS[item.hostCommand], '',  function(err, resp)  {
+                    console.log(sprintf("httpget resp: %s err %s", resp, err));
+                    });
+            }
+      
     }
 	
     else if (item.device == 'ir') 
@@ -745,7 +758,7 @@ function collectPageItems(socket)
 function sendIFTTTalert(item)
 {
 	stateText = (item.state ? item.onText : item.offText);
-	hostAddress = myFindId(httppostDevices, "IFTTT").hostAddress + httppostCOMMANDS["IFTTT.piConEvent"];
+	hostAddress = myFindId(httpDevices, "IFTTT").hostAddress + httpCOMMANDS["IFTTT.piConEvent"];
 	console.log("hostAddress: " + hostAddress  );
 	needle.post(hostAddress, { "value1" : item.name, "value2" : stateText, "value3" : "TBD" } ,  function(err, resp)  {
 	console.log(sprintf("httppost resp: %s err %s", resp, err));
@@ -920,18 +933,6 @@ router.get('/api/Outlet/OFF', function(req, res)
     sendRFCommand("87356", "177", "1");
 });
 
-router.post('/api/Outlet/ON', function(req, res)
-{
-	console.log('<h2>Outlet is ON</h2>')
-    sendRFCommand("87347", "177", "1");
-});
-router.post('/api/Outlet/OFF', function(req, res)
-{
-	console.log('<h2>Outlet is OFF</h2>')
-    sendRFCommand("87356", "177", "1");
-});
-
-
 router.get('/api/BedLight/TOGGLE', function(req, res)
 {
     res.send('<h2>BedLight is TOGGLED</h2>');
@@ -941,16 +942,6 @@ router.get('/api/OfficeLight/TOGGLE', function(req, res)
 {
     res.send('<h2>BedLight is TOGGLED</h2>');
     sendRFCommand("2833921", "416", "1");
-});
-router.get('/api/LED/On', function(req, res)
-{
-    res.send('<h2>LED (26) is On</h2>');
-    activityLED.writeSync(1);
-});
-router.get('/api/LED/Off', function(req, res)
-{
-    res.send('<h2>LED (26) is Off</h2>');
-    activityLED.writeSync(0);
 });
 
 
