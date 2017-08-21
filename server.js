@@ -86,7 +86,7 @@ var httpCOMMANDS = configData.httpCOMMANDS;
 var mySSlist = configData.mySSlist;
 var soundPlayStack = [];
 var soundCheckInterval = 0;
-var activityLED = new Gpio(26, 'out'); // todo - get rid of this (now in data)
+var activityLED = new Gpio(12, 'out'); // todo - get rid of this (now in data)
 
 
 
