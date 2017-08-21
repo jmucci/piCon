@@ -108,6 +108,8 @@ Install Software
 
     $ cd ~
     $ sudo apt-get install git
+	$ git config --global user.email "you@example.com"
+	$ git config --global user.name "Your Name"
 	$ git clone https://github.com/jmucci/piCon.git picon // creates picon folder
     $ cd picon
     $ git config core.filemode false  # so git ignores filemode changes

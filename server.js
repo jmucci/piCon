@@ -20,7 +20,7 @@ var sprintf = require("sprintf-js").sprintf;
 var omx = require('omxdirector');
 
 var iTach = require('./my-simple-itach');  // my home grown version
-
+/* 
 var rpi433    = require('rpi-433'),
 rfSniffer = rpi433.sniffer({
   pin: 2,                     //Snif on GPIO 2 (or Physical PIN 13) 
@@ -30,7 +30,7 @@ rfEmitter = rpi433.emitter({
   pin: 17,                     //Send through GPIO 0 (or Physical PIN 11) 
   pulseLength: 350            //Send the code with a 350 pulse length 
 });
-
+ */
 
 
 // var smartcast = require('vizio-smart-cast');
