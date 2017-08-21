@@ -223,3 +223,12 @@ Hint: {subdomain} == {network name}
     @reboot /usr/bin/forever start -m 5 -l forever.log -o out.log -e err.log -a /home/pi/picon/server.js
 
 
+**When Changing Device Name** 
+
+[**Get** / Create {subdomain}](https://dashboard.ngrok.com/reserved) 
+
+    $ sudo nano /etc/hostname 
+    $ sudo nano /etc/hosts
+	$ crontab -e
+    -------------------------------------
+    # @reboot /home/pi/ngrok http -subdomain={subdomain} 8080
