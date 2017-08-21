@@ -925,22 +925,26 @@ console.log("router asked for '/public/favicon.ico'")
 router.get('/api/Outlet/ON', function(req, res)
 {
     res.send('<h2>Outlet is ON</h2>');
+    activityLEDBlink(300, 100);
     sendRFCommand("87347", "177", "1");
 });
 router.get('/api/Outlet/OFF', function(req, res)
 {
     res.send('<h2>Outlet is OFF</h2>');
+    activityLEDBlink(300, 100);
     sendRFCommand("87356", "177", "1");
 });
 
 router.get('/api/BedLight/TOGGLE', function(req, res)
 {
     res.send('<h2>BedLight is TOGGLED</h2>');
+    activityLEDBlink(300, 100);
     sendRFCommand("5592321", "398", "1");
 });
 router.get('/api/OfficeLight/TOGGLE', function(req, res)
 {
     res.send('<h2>BedLight is TOGGLED</h2>');
+    activityLEDBlink(300, 100);
     sendRFCommand("2833921", "416", "1");
 });
 
