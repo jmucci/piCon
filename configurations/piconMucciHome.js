@@ -200,7 +200,7 @@ var mySSlist = [
 	// cycle: [ '10', '30', '50' ] // 10th, 30th and 50th seconds of every minute
 	
 	{
-	name: "Scheduled Bedroom Light Toggle", device: "cron", cycle: ['14:26:00'] , cronLink: 'BedroomLightToggle',
+	name: "Scheduled Bedroom Light Toggle", device: "cron", cycle: ['11:15:00'] , cronLink: 'BedroomLightToggle',
 	modalAlert: { style:'alert-info' }, iftttAlert:{}
 	},
 	
