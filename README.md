@@ -35,7 +35,7 @@ Set up Wifi connection
 
 **Add** the Wifi credentials
 
-    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+    $ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
     -------------------------------------------------
 	    network={
 	        ssid="{wifi network}"
@@ -46,15 +46,19 @@ Set up Wifi connection
    
    **Configure** DHCP
 
-    sudo nano /etc/network/interfaces
+    $ sudo nano /etc/network/interfaces
     --------------------------------- 
     was: iface wlan0 inet manual
     change to: iface wlan0 inet dhcp
 
 **Rename** the pi a {network name}
 
-    sudo nano /etc/hostname 
-    sudo nano /etc/hosts
+    $ sudo nano /etc/hostname 
+    $ sudo nano /etc/hosts
+
+**Change** wifi locality, local time zone, etc.
+
+	$ sudo raspi-config	
 
 **Reboot** the RPI (**without ethernet cable**) now on WiFi network
 
@@ -68,13 +72,13 @@ Install Software
  
 **Update** the system's software
 
-    sudo apt-get update
-    sudo apt-get dist-upgrade
+    $ sudo apt-get update
+    $ sudo apt-get dist-upgrade
 
 
 **Find** the pi's processor architecture
 	
-    cat /proc/cpuinfo
+    $ cat /proc/cpuinfo
     # for pi0 - ARMv6
     # for pi3 - ARMv7
     # Node install is dependence on CPU architecture
@@ -211,7 +215,7 @@ Hint: {subdomain} == {network name}
 	$ ./ngrok http -subdomain={subdomain} 8080 # test http://{subdomain}.ngrok.io/start
 
 
-**Setup** piCon to boot automatically 
+**Setup** piCon to start services at boot automatically 
 
     $ cd ~
     $ sudo npm install forever --global
