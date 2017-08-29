@@ -82,7 +82,18 @@ var mySSlist = [
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
 	},
 	
+	//	//////////////////////////////////////////////////////////////////////
+	//  relay drivers
+	//
+	{ 
+		device: "gpio", pin : "20",	direction: "out", edges: "both", name: "Door Relay 1", state: false
+	},	
 	
+	{ 
+		device: "gpio", pin : "16",	direction: "out", edges: "both", name: "Door Relay 2", state: false
+	},	
+
+
 ] // end mySSlist
 
 

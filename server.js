@@ -512,13 +512,14 @@ function initCRONdevice(item)
 //
 function initGPIOdevice(item)
 {
+    
     item.gpioObj = new Gpio(item.pin, item.direction, item.edges);
-    item.state = !!+item.gpioObj.readSync();  //  !!+"1"; // true, !!+"0"; // false, !!+1; // true, !!+0; // false
+    item.state = !!+item.gpioObj.readSync();  //  !!+"1" == true, !!+"0" == false
     if (item.activeLow)
     {
         item.state = !item.state;
     }
-	
+	console.log("item.pin %s  item.direction %s item.edges %s item.state %s", item.pin, item.direction, item.edges, item.state);
 	//
 	// setup Gpio watch INPUTs for change - emit message to client on change
 	//
@@ -685,6 +686,9 @@ function executeCommand(item, socket)
     }
     else if (item.device == 'gpio') // todo are these the best tests??? fix  && item.style == 'button-toggle'
     {
+        // if(item.state == undefined) { item.state = false; }
+        item.state = !!+item.gpioObj.readSync();  //  !!+"1" == true, !!+"0" == false
+        item.state = !item.state;
         console.log('setting gpio item: ' + item.name + "  " + ' state: ' + item.state);
         // item.state = 1 - item.state;  // todo maybe we should just read gpio state
         item.gpioObj.writeSync(+item.state); // todo check for null // implicit cast +true; // 1 +false; // 0
@@ -920,6 +924,23 @@ console.log("router asked for '/public/favicon.ico'")
       console.log('Sent:', filename);
     }
   });
+});
+
+
+router.get('/api/Relay1/ON', function(req, res)
+{
+    res.send('<h2>Relay1/ON</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Door Relay 1");
+	executeCommand(item);
+});
+
+router.get('/api/Relay2/ON', function(req, res)
+{
+    res.send('<h2>Relay2/ON</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Door Relay 2");
+	executeCommand(item);
 });
 
 router.get('/api/Outlet/ON', function(req, res)

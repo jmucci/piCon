@@ -42,9 +42,12 @@ var httpCOMMANDS = {
 	"IFTTT.piConEvent": "/piConEvent/with/key/dh5BVMQuljyTGGBNSKzZUF",
 
 	"piconMucciGarage.OutLetON": "/api/Outlet/ON",
-	"piconMucciGarage.OutLetOFF": "/api/Outlet/OFF"
-
+	"piconMucciGarage.OutLetOFF": "/api/Outlet/OFF",
+	"piconMucciGarage.Relay1ON": "/api/Relay1/ON",
+	"piconMucciGarage.Relay2ON": "/api/Relay2/ON",
+	
 };
+
 exports.httpCOMMANDS = httpCOMMANDS;
 
 //
@@ -223,7 +226,26 @@ var mySSlist = [
 	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
 	},  
 	
+	{ 
+	style: "sensor-toggle", page:"Garage", device: "gpio", pin : "22",	direction: "in", edges: "both", activeLow: false,
+	name: "Garage Door",  onText : "open",  offText : "closed" ,
+	onColor : 'danger',  offColor : 'success' , /* onSoundFile: "ThanksForPuttingMyCrownOn.mp3",  offSoundFile: "ThanksForTakingMyCrownOff.mp3", */
+	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
+	},  
 	
+	//	//////////////////////////////////////////////////////////////////////
+	//  relay drivers
+	//
+/* 	{ 
+		style: "button-momentary",  page:"Garage", device: "gpio", pin : "20",	direction: "out", edges: "both",
+		name: "Door Relay 1", state: false
+	},	
+	
+	{ 
+		style: "button-momentary",  page:"Garage", device: "gpio", pin : "16",	direction: "out", edges: "both",
+		name: "Door Relay 2", state: false
+	},	
+	 */
 	//	//////////////////////////////////////////////////////////////////////
 	//
 	// 	roku buttons:  iconOnly, iconAndText  TODO use Materail cion reference
@@ -360,6 +382,9 @@ var mySSlist = [
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFFpost'  
 	},
 
+	
+
+
 	// native version
 	{
 	name: "Outlet Power Native", page:['Office', 'Home'],   
@@ -377,6 +402,21 @@ var mySSlist = [
 	name: "Outlet Power OFF", referLink: 'OutletPowerOFF'  
 	},
 	 
+
+	//
+	// garage relays - http remote POST version
+	// 
+	{ 
+	style: "button-momentary",  page: "Garage", device: "http", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.Relay1ON",
+	name: "Relay-1"  
+	},
+	
+	{ 
+	style: "button-momentary",  page: "Garage", device: "http", hostName: "piconMucciGarage", hostCommand:  "piconMucciGarage.Relay2ON",
+	name: "Relay-2"
+	},
+	
+
 
 	{ 
 	style: "button-momentary",  page:'Office',  device: "rf", hostName: "433",  code:"8528385",  p:"410" , t:"1",
