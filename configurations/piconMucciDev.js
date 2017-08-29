@@ -226,26 +226,7 @@ var mySSlist = [
 	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
 	},  
 	
-	{ 
-	style: "sensor-toggle", page:"Garage", device: "gpio", pin : "22",	direction: "in", edges: "both", activeLow: false,
-	name: "Garage Door",  onText : "open",  offText : "closed" ,
-	onColor : 'danger',  offColor : 'success' , /* onSoundFile: "ThanksForPuttingMyCrownOn.mp3",  offSoundFile: "ThanksForTakingMyCrownOff.mp3", */
-	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
-	},  
 	
-	//	//////////////////////////////////////////////////////////////////////
-	//  relay drivers
-	//
-/* 	{ 
-		style: "button-momentary",  page:"Garage", device: "gpio", pin : "20",	direction: "out", edges: "both",
-		name: "Door Relay 1", state: false
-	},	
-	
-	{ 
-		style: "button-momentary",  page:"Garage", device: "gpio", pin : "16",	direction: "out", edges: "both",
-		name: "Door Relay 2", state: false
-	},	
-	 */
 	//	//////////////////////////////////////////////////////////////////////
 	//
 	// 	roku buttons:  iconOnly, iconAndText  TODO use Materail cion reference

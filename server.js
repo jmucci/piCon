@@ -512,18 +512,27 @@ function initCRONdevice(item)
 //
 function initGPIOdevice(item)
 {
-    
     item.gpioObj = new Gpio(item.pin, item.direction, item.edges);
-    item.state = !!+item.gpioObj.readSync();  //  !!+"1" == true, !!+"0" == false
-    if (item.activeLow)
-    {
-        item.state = !item.state;
-    }
+    if(item.direction == 'out')
+        {
+            if(item.state == undefined) {item.state = false; }
+            item.gpioObj.writeSync(+item.state); 
+        }
+    
+    if(item.direction == 'in')
+        {
+            item.state = !!+item.gpioObj.readSync();  //  !!+"1" == true, !!+"0" == false
+            if (item.activeLow)
+            {
+                item.state = !item.state;
+            }
+        }
+    
 	console.log("item.pin %s  item.direction %s item.edges %s item.state %s", item.pin, item.direction, item.edges, item.state);
 	//
 	// setup Gpio watch INPUTs for change - emit message to client on change
 	//
-	if (item.style == 'sensor-toggle')
+	if (item.direction == 'in')
 	{
 		// console.log(' Now Watching   pin: ' + item.pin + ' name: ' + item.name + ' id: ' + item.id);
 		if (item.gpioObj)
