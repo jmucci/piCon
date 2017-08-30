@@ -55,7 +55,7 @@ var mySSlist = [
 	},
 	
 	{ 
-	device: "gpio", pin : "22", direction: "in", edges: "both", activeLow: false,
+	device: "gpio", pin : "22", direction: "in", edges: "rising", activeLow: false,
 	name: "Garage Door Sensor", relayHostAddress: "http://piconMucciDev:8080", relayHostCommand: "/api/DoorSensorChange/"
 	},  
 	
@@ -68,7 +68,7 @@ var mySSlist = [
 	},	
 	
 	{ 
-		device: "gpio", pin : "16",	direction: "out", edges: "both", name: "Garage Relay 2", state: true, momentaryDelay: 250
+		device: "gpio", pin : "16",	direction: "out", edges: "both", name: "Garage Relay 2", state: true, momentaryDelay: 1000
 	},	
 
 
