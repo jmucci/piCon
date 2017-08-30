@@ -220,7 +220,7 @@ var mySSlist = [
 	},
 	
 	{ 
-	style: "sensor-toggle", page:"Garage", device: "gpio", pin : "22",	direction: "in", edges: "both", activeLow: false,
+	style: "sensor-toggle", page:"Garage", referLink: 'DoorSensorChange',
 	name: "Garage Door",  onText : "open",  offText : "closed" ,
 	onColor : 'danger',  offColor : 'success' , 
 	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
