@@ -68,7 +68,7 @@ var mySSlist = [
 	},	
 	
 	{ 
-		device: "gpio", pin : "16",	direction: "out", edges: "both", name: "Garage Relay 2", state: true, momentaryDelay: 1000
+		device: "gpio", pin : "16",	direction: "out", edges: "both", name: "Garage Relay 2", state: true, momentaryDelay: 250
 	},	
 
 
