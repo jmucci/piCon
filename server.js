@@ -964,7 +964,7 @@ router.get('/api/DoorSensorChange/true', function(req, res)
     activityLEDBlink(300, 100);
     item = myFindLink(mySSlist, 'DoorSensorChange');
     item.state = true;
-
+    emitSensorChange(item);
     // item = myFindName(mySSlist, "Garage Relay 1");
 	// executeCommand(item);
 });
@@ -973,6 +973,9 @@ router.get('/api/DoorSensorChange/false', function(req, res)
 {
     console.log('DoorSensorChange/false');
     activityLEDBlink(300, 100);
+    item = myFindLink(mySSlist, 'DoorSensorChange');
+    item.state = false;
+    emitSensorChange(item);
     // item = myFindName(mySSlist, "Garage Relay 1");
 	// executeCommand(item);
 });
