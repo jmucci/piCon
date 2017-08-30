@@ -12,7 +12,7 @@ exports.irDevices = irDevices;
 //
 var httpDevices = [
 
-	{	id: "piconMucciMucci", hostAddress:  'http://piconMucciHome:8080', hostVerb: 'get' }
+	{	id: "piconHost", hostAddress:  'http://piconMucciDev:8080', hostVerb: 'get' }
 ]
 exports.httpDevices = httpDevices;
 
@@ -21,9 +21,7 @@ exports.httpDevices = httpDevices;
 //
 var httpCOMMANDS = {
 
-	"piconMucciHome.DoorSensorOn": "/api/DoorSensor/ON",
-	"piconMucciHome.DoorSensorOn": "/api/DoorSensor/OFF"
-
+	"piconHost.DoorSensorChange": "/api/DoorSensorChange/{state}",
 };
 exports.httpCOMMANDS = httpCOMMANDS;
 
@@ -52,13 +50,13 @@ var mySSlist = [
 	//  input sensors
 	//
 	{ 
-	style: "sensor-toggle",  device: "gpio", pin : "4", direction: "in", edges: "both", activeLow: false,
+	device: "gpio", pin : "4", direction: "in", edges: "both", activeLow: false,
 	name: "Visitor Detected"
 	},
 	
 	{ 
-	style: "sensor-toggle",  device: "gpio", pin : "22", direction: "in", edges: "both", activeLow: false,
-	name: "Garage Door Sensor"
+	device: "gpio", pin : "22", direction: "in", edges: "both", activeLow: false,
+	name: "Garage Door Sensor", relayHostAddress: "http://piconMucciDev:8080", relayHostCommand: "/api/DoorSensorChange/"
 	},  
 	
 	

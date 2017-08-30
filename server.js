@@ -553,38 +553,48 @@ function initGPIOdevice(item)
 			}
 			console.log('change on: ' + item.id + ': ' + item.state);
 			activityLEDBlink(300, 100);
-			// broadcast
-			io.sockets.emit('sensorStateChange',  
-			{
-				id: item.id,
-				classId: item.classId,
-				state: item.state,
-			});
-			//
-			// test for alert condition --- todo archive these alerts
-			//
-			if (item.modalAlert != undefined && item.state == item.modalAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
-			{
-                // console.log("test for alert condition" + item.modalAlert.whenValueIs + "    " + item.state);
-				// broadcast
-				io.sockets.emit('modalAlert',
-				{
-					item: item,
-					occuredDateTime: Date()
-				});
-			}
-            //
-            //
-			//
-			if (item.iftttAlert != undefined && item.state == item.iftttAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
-			{
-				sendIFTTTalert(item);
-			}
+            // broadcast
+            
+            if(item.relayHostAddress != undefined){ // we are not in charge - just do post to host
+               
+                needle.get(item.relayHostAddress + item.relayHostCommand + item.state, '',  function(err, resp)  {
+                    console.log(sprintf("httpget resp: %s err %s", resp, err));
+                    });
+            }
+
+            else
+                {
+                    io.sockets.emit('sensorStateChange',  
+                    {
+                        id: item.id,
+                        classId: item.classId,
+                        state: item.state,
+                    });
+                    //
+                    // test for alert condition --- todo archive these alerts
+                    //
+                    if (item.modalAlert != undefined && item.state == item.modalAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
+                    {
+                        // console.log("test for alert condition" + item.modalAlert.whenValueIs + "    " + item.state);
+                        // broadcast
+                        io.sockets.emit('modalAlert',
+                        {
+                            item: item,
+                            occuredDateTime: Date()
+                        });
+                    }
+                    //
+                    //
+                    //
+                    if (item.iftttAlert != undefined && item.state == item.iftttAlert.whenValueIs) // todo make this work for analog and other comparison operetos ( <=, >=, etc)
+                    {
+                        sendIFTTTalert(item);
+                    }
+
+                }
+
 			
-			//
-			// play Sound associated with this sensor change
-			//
-			playSound(item);
+			
 		});
 	}	
 };
