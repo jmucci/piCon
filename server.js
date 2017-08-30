@@ -723,6 +723,15 @@ function executeCommand(item, socket)
         console.log('setting gpio item: ' + item.name + "  " + ' state: ' + item.state);
         // item.state = 1 - item.state;  // todo maybe we should just read gpio state
         item.gpioObj.writeSync(+item.state); // todo check for null // implicit cast +true; // 1 +false; // 0
+        if(item.momentaryDelay != undefined)
+            {
+                setTimeout(function()
+                {
+                    item.state = !item.state;
+                    item.gpioObj.writeSync(+item.state);
+                }, item.momentaryDelay);
+            }
+
     }
     else if (item.device == 'rf') 
     {
