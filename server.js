@@ -556,7 +556,7 @@ function initGPIOdevice(item)
             // broadcast
             
             if(item.relayHostAddress != undefined){ // we are not in charge - just do post to host
-               
+               console.log("making host get: %s", item.relayHostAddress + item.relayHostCommand + item.state );
                 needle.get(item.relayHostAddress + item.relayHostCommand + item.state, '',  function(err, resp)  {
                     console.log(sprintf("httpget resp: %s err %s", resp, err));
                     });
