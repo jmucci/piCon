@@ -222,7 +222,7 @@ var mySSlist = [
 	{ 
 	style: "sensor-toggle", page:"Garage", device: "gpio", pin : "22",	direction: "in", edges: "both", activeLow: false,
 	name: "Garage Door",  onText : "open",  offText : "closed" ,
-	onColor : 'danger',  offColor : 'success' , /* onSoundFile: "ThanksForPuttingMyCrownOn.mp3",  offSoundFile: "ThanksForTakingMyCrownOff.mp3", */
+	onColor : 'danger',  offColor : 'success' , 
 	modalAlert: { whenValueIs:true, style:'alert-danger' }, iftttAlert:{ whenValueIs:true }
 	},  
 	

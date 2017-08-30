@@ -936,11 +936,27 @@ console.log("router asked for '/public/favicon.ico'")
 });
 
 
+router.get('/api/GarageDoorSensor/ON', function(req, res)
+{
+    res.send('<h2>GarageDoorSensor/ON</h2>');
+    activityLEDBlink(300, 100);
+    // item = myFindName(mySSlist, "Garage Relay 1");
+	// executeCommand(item);
+});
+
+router.get('/api/GarageDoorSensor/OFF', function(req, res)
+{
+    console.log('GarageDoorSensor/OFF');
+    activityLEDBlink(300, 100);
+    // item = myFindName(mySSlist, "Garage Relay 1");
+	// executeCommand(item);
+});
+
 router.get('/api/Relay1/ON', function(req, res)
 {
     res.send('<h2>Relay1/ON</h2>');
     activityLEDBlink(300, 100);
-    item = myFindName(mySSlist, "Door Relay 1");
+    item = myFindName(mySSlist, "Garage Relay 1");
 	executeCommand(item);
 });
 
@@ -948,7 +964,7 @@ router.get('/api/Relay2/ON', function(req, res)
 {
     res.send('<h2>Relay2/ON</h2>');
     activityLEDBlink(300, 100);
-    item = myFindName(mySSlist, "Door Relay 2");
+    item = myFindName(mySSlist, "Garage Relay 2");
 	executeCommand(item);
 });
 
