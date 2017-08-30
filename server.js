@@ -946,17 +946,17 @@ console.log("router asked for '/public/favicon.ico'")
 });
 
 
-router.get('/api/GarageDoorSensor/ON', function(req, res)
+router.get('/api/DoorSensorChange/true', function(req, res)
 {
-    res.send('<h2>GarageDoorSensor/ON</h2>');
+    console.log('DoorSensorChange/true');
     activityLEDBlink(300, 100);
     // item = myFindName(mySSlist, "Garage Relay 1");
 	// executeCommand(item);
 });
 
-router.get('/api/GarageDoorSensor/OFF', function(req, res)
+router.get('/api/DoorSensorChange/false', function(req, res)
 {
-    console.log('GarageDoorSensor/OFF');
+    console.log('DoorSensorChange/false');
     activityLEDBlink(300, 100);
     // item = myFindName(mySSlist, "Garage Relay 1");
 	// executeCommand(item);
