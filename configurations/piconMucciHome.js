@@ -73,6 +73,13 @@ var irCOMMANDS = {
 	"switch1.input3":"sendir,1:1,1,37993,<repeat>,1,343,171,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,63,22,21,22,63,22,21,22,21,22,21,22,21,22,63,22,21,22,63,22,21,22,63,22,63,22,63,22,63,22,1513,237,3700",
 	"switch1.input4":"sendir,1:1,1,37878,<repeat>,1,343,170,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,1508,343,85,22,3700",
 
+//	tv2 (MasterBedroom) uses port 1:2
+	"tv2.switch1.input1":"sendir,1:2,1,37878,<repeat>,1,343,170,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,21,22,63,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,21,22,63,22,63,22,63,22,63,22,63,22,1509,343,85,22,3638,343,85,22,3638,343,85,22,3638,343,85,22,3700",
+	"tv2.switch1.input2":"sendir,1:2,1,37993,<repeat>,1,343,171,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,63,22,63,22,21,22,21,22,21,22,21,22,21,22,63,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,3700",
+	"tv2.switch1.input3":"sendir,1:2,1,37993,<repeat>,1,343,171,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,63,22,21,22,63,22,21,22,21,22,21,22,21,22,63,22,21,22,63,22,21,22,63,22,63,22,63,22,63,22,1513,237,3700",
+	"tv2.switch1.input4":"sendir,1:2,1,37878,<repeat>,1,343,170,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,63,22,21,22,63,22,63,22,63,22,63,22,63,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,63,22,63,22,63,22,1508,343,85,22,3700",
+
+
 	//  uses port 1:3
 	"sb2.VOLUMEDOWN": "sendir,1:3,1,38000,<repeat>,69,347,174,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,21,21,65,21,21,21,21,21,21,21,65,21,21,21,21,21,65,21,21,21,65,21,65,21,65,21,21,21,65,21,1572,347,87,21,3708",	
 	"sb2.VOLUMEUP": "sendir,1:3,1,38000,<repeat>,69,343,172,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,22,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,65,21,22,21,22,21,22,21,22,21,22,21,65,21,22,21,22,21,65,21,65,21,65,21,65,21,65,21,22,21,65,21,1673,343,86,21,3732",
@@ -387,6 +394,13 @@ var mySSlist = [
 
 	// 2017-08-13 15:00:58 - [INFO] rfrx433: 2833921 [pulselength 415, protocol 1]
 
+
+	// TV Controls MasterBedroom
+	{ 
+		style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv2.POWER", repeatCount: 3,
+		name: "TV Bedroom Power", sequenceGroups: ["Good Night"]
+	},
+			
 	{ 
 	style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
 	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
@@ -396,6 +410,13 @@ var mySSlist = [
 	sequence: "Good Night", style: "button-momentary",  page:'MasterBedroom',  device: "sequencer",
 	name: "Good Night"
 	},
+	
+
+	{ name: "Roku Source", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input1" },
+	{ name: "Cast Source", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input2" }, 
+	{ name: "Source 3", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input3" },
+	{ name: "Source 4", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input4" }, 
+	
 	
 
 	//
@@ -553,12 +574,7 @@ var mySSlist = [
 	},
 	
 	
-	// TV Controls MasterBedroom
-	{ 
-	style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv2.POWER", repeatCount: 3,
-	name: "TV Bedroom Power", sequenceGroups: ["Good Night"]
-	}
-	
+
 	/* these discreets do not work
 	{ 
 	style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv2.POWEROFF",
