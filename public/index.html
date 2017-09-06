@@ -37,6 +37,20 @@
 </script>
 
 
+
+
+<script id="widget-3c-template" type='text/ractive'>
+	
+			<div id="{{ itemID }}-widget" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+				<div style="grid-column: 1 / 4;"><h5 style="margin:0; text-align:center"> {{name}} </h5>
+				</div>
+				<!-- widget items go here -->
+			</div>
+
+</script>
+
+
+
 <script id="widget-upDown-template" type='text/ractive'>
 	
 			<div id="{{ itemID }}-widget" style="border: 1px solid rgb(255,171,64); float: left;">
@@ -637,18 +651,26 @@ function createButtonMomentaryItem(item) {
 	//else
 	
 	var targetElement;
-	
+	var targetQuery;
+
 	//  this item part of a widget target is widget
 	if(item.widget != null )
 	{
-		console.log("item.widget: " + item.widget);
-		targetElement = $("#" + item.widget.parentItemId + "-widget ." + item.widget.classId);  // NOTE "-widget<space><dot>"
+		targetQuery = "#" + item.widget.parentItemId + "-widget"
+		if(item.widget.classId != undefined)
+		{
+			targetQuery += " ." + item.widget.classId;  // NOTE "-widget<space><dot>"
+		}
+		
+		console.log("widget target: " + targetQuery);
 	}
 	else // NOT in widget - just slap it on the target page
 	{
 		itemTarget = pageMaker.getItemTarget(item);
-		targetElement = $("#" + itemTarget);
+		targetQuery = "#" + itemTarget;
 	}
+	
+	targetElement = $(targetQuery);
 	
 	// itemTarget = pageMaker.getItemTarget(item);
 	// el = $("#" + itemTarget);
@@ -718,7 +740,7 @@ function createWidget(item) {
 		data:
 		{
 			itemID: item.id,  // todo if we allow items in more that on page - this is a problem!!!!
-			text: item.name
+			name: item.name
 		}
 	});
 }

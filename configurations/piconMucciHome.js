@@ -141,7 +141,7 @@ var pageItems = [
 	{
 		id: "Home",
 		title: "Home",
-		isActive: false
+		isActive: true
 	},
 	{
 		id: "LivingRoom",
@@ -177,7 +177,7 @@ var pageItems = [
 	{
 		id: "Garage",
 		title: "Garage",
-		isActive: true
+		isActive: false
 	},
 	{
 		id: "Office",
@@ -424,49 +424,42 @@ var mySSlist = [
 	
 	
 	// 433 mhz RF lighting controls
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833921",  p:"410" , t:"1",
-	name: "Bath Light A Power"
+
+	{
+		name: "Bath Light A", style: "widget-3c", page: "Bathroom", device: "widget", referLink: "widget-grid-3c"
 	},
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833925",  p:"410" , t:"1",
-	name: "Bath Light A UP"
-	},
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833926",  p:"410" , t:"1",
-	name: "Bath Light A DOWN"
-	},
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833927",  p:"410" , t:"1",
-	name: "Bath Light A 100"
-	},
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833928",  p:"410" , t:"1",
-	name: "Bath Light A 50"
-	},
-	{ 
-	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833929",  p:"410" , t:"1",
-	name: "Bath Light A 25"
-	},	
 
 
-	{ 
-		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833922",  p:"410" , t:"1",
-		name: "Bath Light A 22"
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833925", p: "410", t: "1",
+		name: "UP", widget: { parentReferLink: "widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
-	{ 
-		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833923",  p:"410" , t:"1",
-		name: "Bath Light A 23"
-	},	
-	{ 
-		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833924",  p:"410" , t:"1",
-		name: "Bath Light A 24"
+
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833921", p: "410", t: "1",
+		name: "Power", widget: { parentReferLink: "widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+	},
+
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
+		name: "DOWN", widget: { parentReferLink: "widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
+		name: "100", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833928", p: "410", t: "1",
+		name: "50", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833929", p: "410", t: "1",
+		name: "25", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly"
 	},	
 
 	//
 	// infared (ir) controls
 	//
-	
 	
 	// HOME page
 	{

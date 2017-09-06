@@ -440,9 +440,8 @@ mySSlist.forEach(function(item, index)
 	{
 		
 		parentItem = myFindLink(mySSlist, item.widget.parentReferLink);
-		
 		item.widget['parentItemId'] = parentItem.id;  // transfer parent id to child
-		console.log(item.widget);
+		console.log(item.widget.parentItemId);
 	}
 	
 		

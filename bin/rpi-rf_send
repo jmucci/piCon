@@ -35,6 +35,5 @@ logging.info(str(args.code) +
              ", pulselength: " + str(pulselength) + "]")
 
 rfdevice.tx_code(args.code, args.protocol, args.pulselength)
-rfdevice.tx_code(args.code, args.protocol, args.pulselength)
 
 rfdevice.cleanup()
