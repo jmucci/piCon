@@ -160,11 +160,16 @@ var pageItems = [
 		style: 'grid'
 	},
 	
-	
 	{
 		id: "MasterBedroom",
 		title: "Master Bedroom"
 	},
+
+	{
+		id: "Bathroom",
+		title: "Bathroom"
+	},
+
 	{
 		id: "Kitchen",
 		title: "Kitchen"
@@ -397,8 +402,8 @@ var mySSlist = [
 
 	// TV Controls MasterBedroom
 	{ 
-		style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv2.POWER", repeatCount: 3,
-		name: "TV Bedroom Power", sequenceGroups: ["Good Night"]
+	style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv2.POWER", repeatCount: 3,
+	name: "TV Bedroom Power", sequenceGroups: ["Good Night"]
 	},
 			
 	{ 
@@ -418,6 +423,45 @@ var mySSlist = [
 	{ name: "Source 4", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input4" }, 
 	
 	
+	// 433 mhz RF lighting controls
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833921",  p:"410" , t:"1",
+	name: "Bath Light A Power"
+	},
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833925",  p:"410" , t:"1",
+	name: "Bath Light A UP"
+	},
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833926",  p:"410" , t:"1",
+	name: "Bath Light A DOWN"
+	},
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833927",  p:"410" , t:"1",
+	name: "Bath Light A 100"
+	},
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833928",  p:"410" , t:"1",
+	name: "Bath Light A 50"
+	},
+	{ 
+	style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833929",  p:"410" , t:"1",
+	name: "Bath Light A 25"
+	},	
+
+
+	{ 
+		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833922",  p:"410" , t:"1",
+		name: "Bath Light A 22"
+	},
+	{ 
+		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833923",  p:"410" , t:"1",
+		name: "Bath Light A 23"
+	},	
+	{ 
+		style: "button-momentary",  page:'Bathroom',  device: "rf", hostName: "433",  code:"2833924",  p:"410" , t:"1",
+		name: "Bath Light A 24"
+	},	
 
 	//
 	// infared (ir) controls
