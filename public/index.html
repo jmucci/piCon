@@ -37,15 +37,16 @@
 </script>
 
 
-
-
 <script id="widget-3c-template" type='text/ractive'>
-	
-			<div id="{{ itemID }}-widget" style="display: grid; grid-template-columns: repeat(3, 1fr);">
-				<div style="grid-column: 1 / 4;"><h5 style="margin:0; text-align:center"> {{name}} </h5>
-				</div>
-				<!-- widget items go here -->
+
+	<div class="widgetFence">
+		<div id="{{ itemID }}-widget" style="display: grid; grid-template-columns: repeat(3, 1fr);">
+			<div class="widgetTitle" style="grid-column: 1 / 4;">
+				<h5 style="margin:0; text-align:center"> {{name}} </h5>
 			</div>
+			<!-- widget items go here -->
+		</div>
+	</div>
 
 </script>
 
@@ -1260,7 +1261,19 @@ float: left;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;
 }
 	
-	
+.widgetTitle {
+    background-color: rgb(255,171,64);
+    padding: 2px;
+}
 
-	
+.widgetFence{
+
+    border-radius: 8px;
+    border: 2px solid rgb(255,171,64);
+}
+
+
+
+
+
 </style>
