@@ -423,39 +423,98 @@ var mySSlist = [
 	{ name: "Source 4", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input4" }, 
 	
 	
-	// 433 mhz RF lighting controls
-
+	// ////////////////////////////////////////////////////////////
+	//
+	// Bathroom 433 mhz RF lighting controls
+	//
+	// //////////////////////////////////////////////////////////
 	{
-		name: "Bath Light A", style: "widget-3c", page: "Bathroom", device: "widget", referLink: "widget-grid-3c"
+		name: "Bath Light A", style: "widget-3c", page: "Bathroom", device: "widget", referLink: "A-widget-grid-3c"
 	},
-
-
+	// ///////////////
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833925", p: "410", t: "1",
-		name: "UP", widget: { parentReferLink: "widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
+		name: "UP", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
-
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833921", p: "410", t: "1",
-		name: "Power", widget: { parentReferLink: "widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+		name: "Power", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
 	},
-
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
-		name: "DOWN", widget: { parentReferLink: "widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+		name: "DOWN", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
-		name: "100", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly"
+		name: "100", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsHigh"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833928", p: "410", t: "1",
-		name: "50", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
+		name: "50", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833929", p: "410", t: "1",
-		name: "25", widget: { parentReferLink: "widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly"
+		name: "25", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLow"]
+		
 	},	
+
+	// //////////////////////////////////////////////////////////
+	{
+		name: "Bath Light D", style: "widget-3c", page: "Bathroom", device: "widget", referLink: "D-widget-grid-3c"
+	},
+	// ///////////////
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
+		name: "UP", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
+		name: "Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
+		name: "DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476679", p: "413", t: "1",
+		name: "100", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsHigh"]
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476680", p: "413", t: "1",
+		name: "50", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
+	},
+	{
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476681", p: "413", t: "1",
+		name: "25", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLow"]
+	},	
+
+	{ 
+		style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
+		name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
+	},
+	//
+	//	////////////////////////////////////////////////
+	//
+	{ 
+		sequence: "LightsLow", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
+		name: "Lights Low"
+	},
+
+	{ 
+		sequence: "LightsHigh", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
+		name: "Lights High"
+	},
+
+	
+	
+		
+
+
+
 
 	//
 	// infared (ir) controls
