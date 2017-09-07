@@ -408,7 +408,8 @@ var mySSlist = [
 			
 	{ 
 	style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
-	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
+	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false, 
+	delayAfter: 1000
 	},
 	
 	{ 
@@ -422,6 +423,7 @@ var mySSlist = [
 	{ name: "Source 3", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input3" },
 	{ name: "Source 4", style: "button-momentary",  page:"MasterBedroom",  device: "ir",  hostName: "TVremote", hostCommand: "tv2.switch1.input4" }, 
 	
+
 	
 	// ////////////////////////////////////////////////////////////
 	//
@@ -447,16 +449,17 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
 		name: "100", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"]
+		sequenceGroups: ["LightsHigh"], delayAfter: 1000
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833928", p: "410", t: "1",
-		name: "50", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
+		name: "50", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsMedium"], delayAfter: 1000
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833929", p: "410", t: "1",
 		name: "25", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsLow"]
+		sequenceGroups: ["LightsLow"], delayAfter: 1000
 		
 	},	
 
@@ -480,30 +483,31 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476679", p: "413", t: "1",
 		name: "100", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"]
+		sequenceGroups: ["LightsHigh"], delayAfter: 1000
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476680", p: "413", t: "1",
-		name: "50", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly"
+		name: "50", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsMedium"], delayAfter: 1000
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476681", p: "413", t: "1",
 		name: "25", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsLow"]
+		sequenceGroups: ["LightsLow"], delayAfter: 1000
 	},	
 
-	{ 
-		style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
-		name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
-	},
+
 	//
 	//	////////////////////////////////////////////////
 	//
 	{ 
 		sequence: "LightsLow", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
-		name: "Lights Low"
+		name: "Lights Low", sequenceGroups: ["Good Night"], delayAfter: 5000
 	},
-
+	{ 
+		sequence: "LightsMedium", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
+		name: "Lights Medium"
+	},
 	{ 
 		sequence: "LightsHigh", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
 		name: "Lights High"

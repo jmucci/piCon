@@ -15,7 +15,7 @@ var io = require('socket.io')(server);
 // var socket;
 var Gpio = require('onoff').Gpio;
 var say = require('say');
-var async = require('async');
+// var async = require('async');
 var sprintf = require("sprintf-js").sprintf;
 var omx = require('omxdirector');
 
@@ -171,7 +171,7 @@ function getRandomInt(min, max)
 
 function sendRFCommand(code, p, t)
 {
-    // console.log("rpi-rf_send -p " + p + " -t " + t + " " + code);
+    console.log("rpi-rf_send -p " + p + " -t " + t + " " + code);
     exec("~/picon/bin/rpi-rf_send -p " + p + " -t " + t + " " + code, function(error, stdout, stderr)
     {
         //console.log('stdout: ' + stdout);
@@ -670,24 +670,37 @@ function executeCommand(item, socket)
 		});
     }
 
-    else if (item.device == 'sequencer')
-    {
+    else if (item.device == 'sequencer') {
+        var delayAfter = 0;
         console.log("processing sequence: " + item.sequence);
-        findSequenceGroupItems(mySSlist, item.sequence).forEach(function(subItem, index)
-        {
+        findSequenceGroupItems(mySSlist, item.sequence).forEach(function (subItem, index) {
             subItem.state = item.state;
             subItem.command = item.command; // transferr sequence request to each subitme  todo - what is this???
             console.log("found item in sequence executing: " + subItem.name + " index: " + index);
-			io.sockets.emit('toastAlert',   subItem.name );
-			/* {
-				id: item.id,
-				state: item.state,
-			});		 */
 
-            executeCommand(subItem, socket);
+            delayAfter = 0;
+            if (subItem.delayAfter != undefined) { delayAfter = subItem.delayAfter; }
+
+            if (index == 0) {
+                executeCommand(subItem, socket);
+                io.sockets.emit('toastAlert', subItem.name);
+            }
+            else {
+                if (delayAfter > 0) {
+                    console.log("delaying after for: %s", delayAfter)
+                    setTimeout(function () {
+                        executeCommand(subItem, socket);
+                        io.sockets.emit('toastAlert', subItem.name);
+                    }, delayAfter);
+                }
+                else {
+                    executeCommand(subItem, socket);
+                    io.sockets.emit('toastAlert', subItem.name);
+                }
+            }
         });
     }
-	
+
 
     else if (item.device == 'discete_toggle')
     {
@@ -987,6 +1000,31 @@ router.get('/api/DoorSensorChange/false', function(req, res)
     // item = myFindName(mySSlist, "Garage Relay 1");
 	// executeCommand(item);
 });
+
+router.get('/api/Bathroom/Lights/Low', function(req, res)
+{
+    res.send('<h2>Bathroom/Lights/Low</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Lights Low");
+	executeCommand(item);
+});
+
+router.get('/api/Bathroom/Lights/Medium', function(req, res)
+{
+    res.send('<h2>Bathroom/Lights/Medium</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Lights Medium");
+	executeCommand(item);
+});
+
+router.get('/api/Bathroom/Lights/High', function(req, res)
+{
+    res.send('<h2>Bathroom/Lights/High</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Lights High");
+	executeCommand(item);
+});
+
 
 router.get('/api/Relay1/ON', function(req, res)
 {
