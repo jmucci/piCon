@@ -545,11 +545,11 @@ var mySSlist = [
 		sequence: "LightsLow", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
 		name: "Lights Low", sequenceGroups: ["Good Night"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
 	},
-
+/* 
 	{ 
 		sequence: "LightsLowNudge",  device: "sequencer", name: "Lights Low Nudge", sequenceGroups: ["LightsLow"], rampCount: 3
 	},
-
+ */
 	//
 	// infared (ir) controls
 	//
