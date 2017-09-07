@@ -480,7 +480,7 @@ var mySSlist = [
 	},
 	// ///////////////
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476677", p: "413", t: "1",
 		name: "Light(D) UP", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
 	{
