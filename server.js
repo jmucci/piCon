@@ -445,26 +445,24 @@ mySSlist.forEach(function(item, index)
 	}
 	
 		
-	if (item.device == 'cron')
-    {
+    if (item.device == 'cron') {
         initCRONdevice(item);
     }
-	
-    if (item.device == 'gpio')
-    {
+
+    if (item.device == 'gpio') {
         initGPIOdevice(item);
     }
-    if (item.device == 'ir')
-    {
+    if (item.device == 'ir') {
         initIRdevice(item);
     }
-	if (item.device == 'http')
-    {
+    if (item.device == 'rf') {
+        initRFdevice(item);
+    }
+    if (item.device == 'http') {
         inithttpDevice(item);
     }
-		
-    else
-    {
+
+    else {
         // console.log ("did not init item, device: ", item.device);
     }
 });
@@ -608,14 +606,26 @@ function emitSensorChange(item)
 }
 
 
-
-
 //
 //  init initIRdevice item
 //
 function initIRdevice(item)
 {
 	item.host = myFindId(irDevices, item.hostName).host;
+	if(item.repeatCount == undefined)
+	{
+		item.repeatCount = 1; // default
+	}
+	if(item.rampCount == undefined)
+	{
+		item.rampCount = 1; // default
+	}
+	
+};
+
+function initRFdevice(item)
+{
+	
 	if(item.repeatCount == undefined)
 	{
 		item.repeatCount = 1; // default
@@ -741,11 +751,16 @@ function executeCommand(item, socket)
             }
 
     }
-    else if (item.device == 'rf') 
-    {
+    
+    else if (item.device == 'rf') {
         sendRFCommand(item.code, item.p, item.t);
+        if (item.rampCount > 1) {
+            for (i = 1; i < item.rampCount; i++) {  // i=1 already did one of them
+                sendRFCommand(item.code, item.p, item.t);
+            }
+        }
     }
-	
+
 	else if (item.device == 'http') 
     {
         command = item.hostAddress + httpCOMMANDS[item.hostCommand];

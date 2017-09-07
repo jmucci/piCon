@@ -455,7 +455,8 @@ var mySSlist = [
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
-		name: "Light(A) DOWN", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+		name: "Light(A) DOWN", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLowNudge"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
@@ -489,7 +490,8 @@ var mySSlist = [
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
-		name: "Light(D) DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+		name: "Light(D) DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLowNudge"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476679", p: "413", t: "1",
@@ -507,6 +509,20 @@ var mySSlist = [
 		sequenceGroups: ["LightsLow"]
 	},	
 
+	
+	// TODO this should be a repeat count on a SEQUENCE
+	// TODO add priotity (order) seq items - here we MUST have 25% set BEFORE nudging to get the effect
+	{
+		/* style: "button-momentary", page: 'Bathroom', */ device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
+		name: "Light(A) DOWN NUDGE", rampCount: 3,
+		sequenceGroups: ["LightsLow"]
+	},
+
+	{
+		/* style: "button-momentary", page: 'Bathroom', */ device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
+		name: "Light(D) DOWN NUDGE", rampCount: 3,
+		sequenceGroups: ["LightsLow"]
+	},
 
 	//
 	//	////////////////////////////////////////////////
@@ -530,6 +546,9 @@ var mySSlist = [
 		name: "Lights Low", sequenceGroups: ["Good Night"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
 	},
 
+	{ 
+		sequence: "LightsLowNudge",  device: "sequencer", name: "Lights Low Nudge", sequenceGroups: ["LightsLow"], rampCount: 3
+	},
 
 	//
 	// infared (ir) controls
