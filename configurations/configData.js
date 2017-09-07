@@ -358,13 +358,7 @@ var mySSlist = [
 	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerON', offLink: 'OutletPowerOFF', 
 	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
 	},
-/* 	
-	{
-	name: "Outlet Power", page:'Home',   
-	style: "button-toggle", device: "discete_toggle",  onLink: 'OutletPowerON', offLink: 'OutletPowerOFF', 
-	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
-	},
-	 */
+
 
 	{ 
 	style: "button-momentary",  /*  page: "Office", */  device: "rf", hostName: "433",  code:"87347",  p:"177" , t:"1",
@@ -387,28 +381,6 @@ var mySSlist = [
 	},
 	
 
-	//
-	// infared (ir) controls
-	//
-	
-	// AMP controls
-	
-	/*
-	{ 
-	style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "AMPremote", hostCommand:  "amp.POWERON",
-	name: "AMP Power On", referLink:'AMPPowerON', sequenceGroups: ["System ON"], soundFile: " AMP Power On "
-	},
-	{ 
-	style: "button-momentary",  page:"LivingRoom",   device: "ir", hostName: "AMPremote",  hostCommand:  "amp.POWEROFF",
-	name: "AMP Power Off", referLink:'AMPPowerOFF', sequenceGroups: ["System OFF"], soundFile: " AMP Power Off "
-	},	
-	{
-	name: "AMP Power",    page:"LivingRoom",  
-	style: "button-toggle", device: "discete_toggle",  
-	onLink: 'AMPPowerON', offLink: 'AMPPowerOFF', 
-	onText : "ON",  offText : "OFF", onColor : 'success',  offColor : 'default'
-	},	
-	*/
 	
 	// HOME page
 	{
@@ -441,67 +413,10 @@ var mySSlist = [
 	
 	{ 
 	style: "button-momentary",  page:"LivingRoom",    device: "ir",  hostName: "TVremote", hostCommand:  "tv.POWERON",
-	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], defaultDelayAfter:200, position:{ row:1, col:2 }
+	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], position:{ row:1, col:2 }
 	},
 	
-	//
-	// Watch DVD: 
-	//
-	/*
-	{ 
-	style: "button-momentary", page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.POWER",
-	name: "DVD.POWER", icon:"/images/Home (Roku).png",  iconStyle:"iconOnly", position: { row:2, col:1 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.TRAY",
-	name: "DVD.TRAY", icon:"/images/Back (Roku).png", iconStyle:"iconOnly", position: { row:2, col:3 }
-	},	
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.CURSORRIGHT",
-	name: "DVD.CURSORRIGHT", icon:"/images/Nav - Right.png",  iconStyle:"iconOnly", position: { row:3, col:3 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.CURSORLEFT",
-	name: "DVD.CURSORLEFT", icon:"/images/Nav - Left.png",   iconStyle:"iconOnly", position: { row:3, col:1 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.CURSORUP",
-	name: "DVD.CURSORUP", icon:"/images/Nav - Up.png",    iconStyle:"iconOnly", position: { row:2, col:2 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.CURSORDOWN",
-	name: "DVD.CURSORDOWN", icon:"/images/Nav - Down.png",   iconStyle:"iconOnly", position: { row:4, col:2 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.CURSORENTER",
-	name: "DVD.CURSORENTER", icon:"/images/OK (Roku).png",   iconStyle:"iconOnly", position: { row:3, col:2 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.PLAY",
-	name: "DVD.PLAY", icon:"/images/Transports - Play.png",   iconStyle:"iconOnly", position: { row:5, col:2 }
-	},	
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.STOP",
-	name: "DVD.STOP", icon:"/images/Transports - Fast Backward.png",    iconStyle:"iconOnly", position: { row:5, col:1 }
-	},	
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.MENUDISC",
-	name: "DVD.MENUDISC", icon:"/images/Transports - Fast Forward.png",    iconStyle:"iconOnly", position: { row:5, col:3 }
-	},	
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.PAUSE",
-	name: "DVD.PAUSE", icon:"/images/Replay (Roku).png",   iconStyle:"iconOnly", position: { row:4, col:1 }
-	},
-	{ 
-	style: "button-momentary",  page: 'WatchDVD',   device: "ir",  hostName: "TVremote", hostCommand:  "DVD.Options",
-	name: "DVD.Options", icon:"/images/Options (Roku).png",   iconStyle:"iconOnly",  position: { row:4, col:3 }
-	},	
-*/
-		
-	//
-	//
-	//
-	
+
 		
 	// ////////////////////////////////
 	//
@@ -585,8 +500,8 @@ var mySSlist = [
 	
 	// ////////////////////////////////
 	
-	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
-	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
+	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35 },
+	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35 },
 	
 	{ name: "SB INPUT TV", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.INPUTOPTICAL", sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"]},
 	
@@ -647,13 +562,13 @@ var mySSlist = [
 	// system wide sequences
 	{
 	name: "System ON", sequence: "System ON",  style: "button-momentary", device: "sequencer",  
-	onText : "System ON",  offText : "OFF", onColor : 'success',  offColor : 'danger', /* defaultDelayAfter:5000, */
+	onText : "System ON",  offText : "OFF", onColor : 'success',  offColor : 'danger', 
 	referLink:'SystemPowerON'
 	},
 	
 	{
 	name: "System OFF",  sequence: "System OFF",  style: "button-momentary", device: "sequencer",  
-	onText : "System OFF",  offText : "OFF", onColor : 'success',  offColor : 'danger', /* defaultDelayAfter:5000, */
+	onText : "System OFF",  offText : "OFF", onColor : 'success',  offColor : 'danger', 
 	referLink:'SystemPowerOFF' 
 	},
 	

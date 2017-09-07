@@ -9,7 +9,6 @@
   "author": "John Mucci",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.5.0",
     "body-parser": "^1.17.2",
     "child_process": "^1.0.2",
     "express": "^4.15.3",

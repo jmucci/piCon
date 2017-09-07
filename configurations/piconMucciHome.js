@@ -317,6 +317,18 @@ var mySSlist = [
 	name: "Go to Living Room", icon:"home",   iconStyle:"iconOnly",  
 	},
 	
+	{ 
+		style: "button-navigation",  page: 'MasterBedroom',  target:"Bathroom",  
+		name: "Bathroom", icon:"navigation" 
+	},
+	{ 
+		style: "button-navigation",  page: 'Bathroom',  target:"MasterBedroom",  
+		name: "Bedroom", icon:"navigation" 
+	},
+	{ 
+		style: "button-navigation",  page: 'Home',  target:"MasterBedroom",  
+		name: "Bedroom", icon:"navigation" 
+	},
 	
 	
 	
@@ -408,8 +420,7 @@ var mySSlist = [
 			
 	{ 
 	style: "button-momentary",  page:'MasterBedroom',  device: "rf", hostName: "433",  code:"5592321",  p:"398" , t:"1",
-	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false, 
-	delayAfter: 1000
+	name: "Bed Light", icon:"",  iconStyle:"iconAndText", sequenceGroups: ["Good Night"], referLink: "BedroomLightToggle", state: false
 	},
 	
 	{ 
@@ -436,30 +447,30 @@ var mySSlist = [
 	// ///////////////
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833925", p: "410", t: "1",
-		name: "UP", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
+		name: "Light(A) UP", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833921", p: "410", t: "1",
-		name: "Power", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+		name: "Light(A) Power", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
-		name: "DOWN", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+		name: "Light(A) DOWN", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
-		name: "100", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"], delayAfter: 1000
+		name: "Light(A) 100%", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsHigh"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833928", p: "410", t: "1",
-		name: "50", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsMedium"], delayAfter: 1000
+		name: "Light(A) 50%", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsMedium"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833929", p: "410", t: "1",
-		name: "25", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsLow"], delayAfter: 1000
+		name: "Light(A) 25%", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLow"]
 		
 	},	
 
@@ -470,54 +481,54 @@ var mySSlist = [
 	// ///////////////
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
-		name: "UP", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
+		name: "Light(D) UP", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
-		name: "Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+		name: "Light(D) Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
-		name: "DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
+		name: "Light(D) DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly"
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476679", p: "413", t: "1",
-		name: "100", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"], delayAfter: 1000
+		name: "Light(D) 100%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsHigh"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476680", p: "413", t: "1",
-		name: "50", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsMedium"], delayAfter: 1000
+		name: "Light(D) 50%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsMedium"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476681", p: "413", t: "1",
-		name: "25", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsLow"], delayAfter: 1000
+		name: "Light(D) 25%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
+		sequenceGroups: ["LightsLow"]
 	},	
 
 
 	//
 	//	////////////////////////////////////////////////
+	// TODO widget children do not rewolve correctly when widget duplicated on > 1 pages.
 	//
-	{ 
-		sequence: "LightsLow", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
-		name: "Lights Low", sequenceGroups: ["Good Night"], delayAfter: 5000
-	},
-	{ 
-		sequence: "LightsMedium", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
-		name: "Lights Medium"
-	},
-	{ 
-		sequence: "LightsHigh", style: "button-momentary",  page:'Bathroom',  device: "sequencer",
-		name: "Lights High"
-	},
 
+	{
+		name: "Bath Light Scenes", style: "widget-3c", page: ["Bathroom"], device: "widget", referLink: "BathLightScenes"
+	},
 	
-	
-		
-
-
+	{ 
+		sequence: "LightsHigh", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
+		name: "Lights High", widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_5", iconStyle: "iconOnly"
+	},	
+	{ 
+		sequence: "LightsMedium", style: "button-momentary",  page: ['Bathroom'],  device: "sequencer",
+		name: "Lights Medium", widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_6", iconStyle: "iconOnly"
+	},	
+	{ 
+		sequence: "LightsLow", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
+		name: "Lights Low", sequenceGroups: ["Good Night"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
+	},
 
 
 	//
@@ -555,7 +566,7 @@ var mySSlist = [
 	
 	{ 
 	style: "button-momentary",  page:"LivingRoom",    device: "ir",  hostName: "TVremote", hostCommand:  "tv.POWERON",
-	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], defaultDelayAfter:200, position:{ row:1, col:2 }
+	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], position:{ row:1, col:2 }
 	},
 	
 	
@@ -654,8 +665,8 @@ var mySSlist = [
 	
 	// ////////////////////////////////
 	
-	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
-	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
+	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35 },
+	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35 },
 	
 	{ name: "SB INPUT TV", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.INPUTOPTICAL", sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"]},
 	

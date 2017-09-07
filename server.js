@@ -34,7 +34,7 @@ rfEmitter = rpi433.emitter({
 
 
 // var smartcast = require('vizio-smart-cast');
-var exec = require('child_process').exec;
+var exec = require('child_process').execSync;
 var needle = require('needle');
 var path = require('path');  // The path module exposes a join method that allows us to chain together variables to create a file path.
 var nodeCleanup = require('node-cleanup');
@@ -624,10 +624,6 @@ function initIRdevice(item)
 	{
 		item.rampCount = 1; // default
 	}
-	if(item.defaultDelayAfter == undefined)
-	{
-		item.defaultDelayAfter = 150; // default 150 ms
-	}	
 	
 };
 

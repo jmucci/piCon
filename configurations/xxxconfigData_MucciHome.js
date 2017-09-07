@@ -410,7 +410,7 @@ var mySSlist = [
 	
 	{ 
 	style: "button-momentary",  page:"LivingRoom",    device: "ir",  hostName: "TVremote", hostCommand:  "tv.POWERON",
-	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], defaultDelayAfter:200, position:{ row:1, col:2 }
+	name: "TV Power ON", referLink:'TVPowerON', /* soundFile: " TV Power On ", */ sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"], position:{ row:1, col:2 }
 	},
 	
 	
@@ -509,8 +509,8 @@ var mySSlist = [
 	
 	// ////////////////////////////////
 	
-	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
-	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35, defaultDelayAfter: 250 },
+	{ name: "SB Vol WAY DOWN", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEDOWN", repeatCount: 1, rampCount: 35 },
+	{ name: "SB Vol WAY UP", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.VOLUMEUP", repeatCount: 1, rampCount: 35 },
 	
 	{ name: "SB INPUT TV", style: "button-momentary",  page:"LivingRoom",  device: "ir",  hostName: "TVremote", hostCommand: "sb2.INPUTOPTICAL", sequenceGroups: ["Watch Living Room TV", "Watch Living Room DVD"]},
 	
