@@ -514,30 +514,30 @@ var mySSlist = [
 	},
 	// ///////////////
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476677", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19461", p: "413", t: "1",
 		name: "Light(D) UP", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_upward", iconStyle: "iconOnly"
 	},
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476673", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19457", p: "413", t: "1",
 		name: "Light(D) Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
 	},
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19462", p: "413", t: "1",
 		name: "Light(D) DOWN", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "arrow_downward", iconStyle: "iconOnly",
 		sequenceGroups: ["LightsLowNudge"]
 	},
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476679", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19463", p: "413", t: "1",
 		name: "Light(D) 100%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
 		sequenceGroups: ["LightsHigh"]
 	},
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476680", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19464", p: "413", t: "1",
 		name: "Light(D) 50%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_6", iconStyle: "iconOnly",
 		sequenceGroups: ["LightsMedium"]
 	},
 	{
-		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "16476681", p: "413", t: "1",
+		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19465", p: "413", t: "1",
 		name: "Light(D) 25%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
 		sequenceGroups: ["LightsLow"]
 	},	
