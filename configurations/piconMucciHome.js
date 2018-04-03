@@ -519,7 +519,8 @@ var mySSlist = [
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19457", p: "413", t: "1",
-		name: "Light(D) Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly"
+		name: "Light(D) Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly",
+		sequenceGroups: ["Go to Bed"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19462", p: "413", t: "1",
@@ -576,7 +577,7 @@ var mySSlist = [
 	},	
 	{ 
 		sequence: "LightsLow", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
-		name: "Lights Low", sequenceGroups: ["Good Night"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
+		name: "Lights Low", sequenceGroups: ["Good Night", "Go to Bed"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
 	},
 /* 
 	{ 
