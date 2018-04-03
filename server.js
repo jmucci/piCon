@@ -1110,6 +1110,14 @@ router.get('/api/BEDROOM/GOODNIGHT', function(req, res)
 
 });
 
+
+router.get('/api/BEDROOM/SCENE-GOTOBED', function(req, res)
+{
+	item = myFindName(mySSlist, "Go to Bed");
+	executeCommand(item);
+	res.send('<h2>Set: SCENE-GOTOBED</h2>'); 
+});
+
 router.get('/api/LIVINGROOM/WatchLivingRoomTV', function(req, res)
 {
 	item = myFindName(mySSlist, "Watch Living Room TV");
