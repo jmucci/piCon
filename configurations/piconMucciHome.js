@@ -343,6 +343,10 @@ var mySSlist = [
 	 name: "Navigate to DVD Controls", target: "WatchDVD",  sequenceGroups: ["Watch Living Room DVD"], device: "client-navigate"  
 	},
 
+	{ 
+	name: "Navigate to Bedroom", target: "MasterBedroom",  sequenceGroups: ["Go to Bed"], device: "client-navigate"  
+	},
+
 	
 	//
 	// test speaking buttons
