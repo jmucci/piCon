@@ -677,34 +677,36 @@ function executeCommand(item, socket)
     }
 
     else if (item.device == 'sequencer') {
+        var toastMessage = '';
         var delayAfter = 0;
         console.log("processing sequence: " + item.sequence);
+        toastMessage = 'Processing sequence: ' + item.sequence + ' ';
+        io.sockets.emit('toastAlert', toastMessage);
         findSequenceGroupItems(mySSlist, item.sequence).forEach(function (subItem, index) {
             subItem.state = item.state;
             subItem.command = item.command; // transferr sequence request to each subitme  todo - what is this???
             console.log("found item in sequence executing: " + subItem.name + " index: " + index);
+            toastMessage += index + ') ' + subItem.name + ' ';
 
             delayAfter = 0;
             if (subItem.delayAfter != undefined) { delayAfter = subItem.delayAfter; }
 
             if (index == 0) {
                 executeCommand(subItem, socket);
-                io.sockets.emit('toastAlert', subItem.name);
             }
             else {
                 if (delayAfter > 0) {
                     console.log("delaying after for: %s", delayAfter)
                     setTimeout(function () {
                         executeCommand(subItem, socket);
-                        io.sockets.emit('toastAlert', subItem.name);
                     }, delayAfter);
                 }
                 else {
                     executeCommand(subItem, socket);
-                    io.sockets.emit('toastAlert', subItem.name);
                 }
             }
         });
+        io.sockets.emit('toastAlert', 'DONE ' + toastMessage); 
     }
 
 
