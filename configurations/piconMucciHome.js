@@ -498,7 +498,7 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833927", p: "410", t: "1",
 		name: "Light(A) 100%", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"]
+		sequenceGroups: ["LightsHigh", "LightsForDay"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833928", p: "410", t: "1",
@@ -508,7 +508,7 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "2833929", p: "410", t: "1",
 		name: "Light(A) 25%", widget: { parentReferLink: "A-widget-grid-3c" }, icon: "brightness_7", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsLow"]
+		sequenceGroups: ["LightsLow", "LightsForNight"]   
 		
 	},	
 
@@ -524,7 +524,7 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19457", p: "413", t: "1",
 		name: "Light(D) Power", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "power_settings_new", iconStyle: "iconOnly",
-		sequenceGroups: ["Go to Bed"]
+		sequenceGroups: ["LightsForNight", "LightsForDay"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19462", p: "413", t: "1",
@@ -534,7 +534,7 @@ var mySSlist = [
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19463", p: "413", t: "1",
 		name: "Light(D) 100%", widget: { parentReferLink: "D-widget-grid-3c" }, icon: "brightness_5", iconStyle: "iconOnly",
-		sequenceGroups: ["LightsHigh"]
+		sequenceGroups: ["LightsHigh", "LightsForDay"]
 	},
 	{
 		style: "button-momentary", page: 'Bathroom', device: "rf", hostName: "433", code: "19464", p: "413", t: "1",
@@ -551,13 +551,13 @@ var mySSlist = [
 	// TODO this should be a repeat count on a SEQUENCE
 	// TODO add priotity (order) seq items - here we MUST have 25% set BEFORE nudging to get the effect
 	{
-		/* style: "button-momentary", page: 'Bathroom', */ device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
+		device: "rf", hostName: "433", code: "2833926", p: "410", t: "1",
 		name: "Light(A) DOWN NUDGE", rampCount: 3,
-		sequenceGroups: ["LightsLow"]
+		sequenceGroups: ["LightsLow", "LightsForNight"]
 	},
 
 	{
-		/* style: "button-momentary", page: 'Bathroom', */ device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
+		device: "rf", hostName: "433", code: "16476678", p: "413", t: "1",
 		name: "Light(D) DOWN NUDGE", rampCount: 3,
 		sequenceGroups: ["LightsLow"]
 	},
@@ -581,13 +581,20 @@ var mySSlist = [
 	},	
 	{ 
 		sequence: "LightsLow", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
-		name: "Lights Low", sequenceGroups: ["Good Night", "Go to Bed"], widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
+		name: "Lights Low",  widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly"
 	},
-/* 
+
 	{ 
-		sequence: "LightsLowNudge",  device: "sequencer", name: "Lights Low Nudge", sequenceGroups: ["LightsLow"], rampCount: 3
+		sequence: "LightsForDay", style: "button-momentary",  page: ['Bathroom'],  device: "sequencer",
+		name: "Lights For Day", widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_5", iconStyle: "iconOnly"
+	},	
+	{ 	
+		sequence: "LightsForNight", style: "button-momentary",   page: ['Bathroom'],  device: "sequencer",
+		name: "Lights For Night",  widget: { parentReferLink: "BathLightScenes" }, icon: "brightness_7", iconStyle: "iconOnly",
+		sequenceGroups: ["Good Night", "Go to Bed"]
 	},
- */
+
+
 	//
 	// infared (ir) controls
 	//

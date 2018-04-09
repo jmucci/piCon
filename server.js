@@ -680,7 +680,7 @@ function executeCommand(item, socket)
         var toastMessage = '';
         var delayAfter = 0;
         console.log("processing sequence: " + item.sequence);
-        toastMessage = 'Processing sequence: ' + item.sequence + ' ';
+        toastMessage = 'Processing sequence: ' + item.name + ' ';
         io.sockets.emit('toastAlert', toastMessage);
         findSequenceGroupItems(mySSlist, item.sequence).forEach(function (subItem, index) {
             subItem.state = item.state;
