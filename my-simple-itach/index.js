@@ -35,7 +35,7 @@ Itach.prototype.send = function (command, callback) {
 		socket.connect(4998, this.host);  
 		
 		nextCommand = commandQueue.shift();
-		console.log("calling socket.write()");
+		console.log("calling socket.write() at: " + this.host);
 		inProcess = true;
 		socket.write(nextCommand.command, 'ASCII');
 	}
