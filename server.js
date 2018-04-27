@@ -352,14 +352,9 @@ function activityLEDBlink(duration, pace)
 irDevices.forEach(function(item, index)
 {
     activityLEDBlink(200, 50);
-/* 	
-    item.host = new iTach(
-    {
-        host: item.hostAddress
-    });
-	 */
+
 	item.host = new iTach(item.hostAddress);
-	
+	console.log(item.id + " has new Itach assigned at " + item.host.hostAddress);
 });
 
 
@@ -611,7 +606,9 @@ function emitSensorChange(item)
 //
 function initIRdevice(item)
 {
-	item.host = myFindId(irDevices, item.hostName).host;
+    item.host = myFindId(irDevices, item.hostName).host;
+    console.log("IR Device: " + item.id + " has host assigned " + item.host.hostAddress);
+
 	if(item.repeatCount == undefined)
 	{
 		item.repeatCount = 1; // default
@@ -789,9 +786,11 @@ function executeCommand(item, socket)
     {
 		command = irCOMMANDS[item.hostCommand].replace("<repeat>", item.repeatCount);
 		command += '\r';  //  need this for npm simple-itach
-		// console.log("sending command: "  + "rampCount = " + item.rampCount);
+        // console.log("sending command: "  + "rampCount = " + item.rampCount);
+
+        console.log("sending IR to " +  item.host.hostAddress );  
 		item.host.send(command, function callback(err) { if (err) console.log(err); });	
-		
+   
 		if(item.rampCount > 1)
 		{
 			for (i = 0; i < item.rampCount; i++) {
