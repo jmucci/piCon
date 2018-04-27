@@ -1,6 +1,8 @@
 'use strict';
 var Itach;
 var net = require('net');
+
+
 var commandQueue = [];
 var nextCommand;
 var result = [];
@@ -8,13 +10,13 @@ var socket;
 var inProcess = false;
 
 module.exports = Itach = function (host) {
-  this.host = host;
+  this.hostAddress = host;
 };
 
 Itach.prototype.send = function (command, callback) {
 	var err;
 
-	if (!this.host) { return callback(new Error('No host')); }
+	if (!this.hostAddress) { return callback(new Error('No host')); }
 
 	commandQueue.push( {command: command, callback: callback, delay: 250 } );
 	console.log("my itach commandQueue.length: " + commandQueue.length);
@@ -32,10 +34,10 @@ Itach.prototype.send = function (command, callback) {
 		console.log("calling new net.Socket()");
 		socket = new net.Socket();
 		socket.setEncoding('ASCII');
-		socket.connect(4998, this.host);  
+		socket.connect(4998, this.hostAddress);  
 		
 		nextCommand = commandQueue.shift();
-		console.log("calling socket.write() at: " + this.host);
+		console.log("calling socket.write() at: " + this.hostAddress);
 		inProcess = true;
 		socket.write(nextCommand.command, 'ASCII');
 	}

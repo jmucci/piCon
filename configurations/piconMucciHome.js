@@ -411,7 +411,7 @@ var mySSlist = [
 	// TV Controls MasterBedroom
 	{ 
 	style: "button-momentary",   page:"MasterBedroom",   device: "ir",  hostName: "BedroomTVremote", hostCommand:  "tv2.POWER", /* repeatCount: 3, */
-	name: "TV Bedroom Power", sequenceGroups: ["Good Night", "Go to Bed"]
+	name: "TV Bedroom Power", sequenceGroups: ["Good Night", "Go to Bed", "This is a test"]
 	},
 			
 	{
@@ -617,7 +617,7 @@ var mySSlist = [
 	
 	{ 
 	style: "button-momentary",   page:"LivingRoom",   device: "ir",  hostName: "TVremote", hostCommand:  "tv.POWEROFF",
-	name: "TV Power OFF",  referLink:'TVPowerOFF',  /* soundFile: " TV Power Off ", */ sequenceGroups: ["System OFF", "Go to Bed"], position: { row:1, col:3 } 
+	name: "TV Power OFF",  referLink:'TVPowerOFF',  /* soundFile: " TV Power Off ", */ sequenceGroups: ["System OFF", "Go to Bed", "This is a test"], position: { row:1, col:3 } 
 	},
 	
 	{ 
@@ -739,6 +739,11 @@ var mySSlist = [
 	{ 
 	name: "Go to Bed", device: "sequencer", sequence: "Go to Bed", style: "button-momentary",  page:'Home',  
 	},
+	
+	{ 
+		name: "This is a test", device: "sequencer", sequence: "This is a test", style: "button-momentary",  page:'Home',  
+	},
+		
 	
 	{ 
 	name: "Watch Living Room DVD", device: "sequencer", sequence: "Watch Living Room DVD", style: "button-momentary",  page:'Home',  
