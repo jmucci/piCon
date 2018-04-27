@@ -1037,6 +1037,26 @@ router.get('/api/Bathroom/Lights/High', function(req, res)
 	executeCommand(item);
 });
 
+router.get('/api/Bathroom/Lights/Nightime', function(req, res)
+{
+    res.send('<h2>Bathroom/Lights/Nightime</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Lights For Night");
+    executeCommand(item);
+  
+});
+
+router.get('/api/Bathroom/Lights/Daytime', function(req, res)
+{
+    res.send('<h2>Bathroom/Lights/Daytime</h2>');
+    activityLEDBlink(300, 100);
+    item = myFindName(mySSlist, "Lights For Day");
+	executeCommand(item);
+});
+
+
+
+
 
 router.get('/api/Relay1/ON', function(req, res)
 {
