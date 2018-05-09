@@ -1,0 +1,7 @@
+{
+    "name": "piCon Home Automation",
+    "short_name": "piCon",
+    "lang": "en-US",
+    "start_url": "http://piconmuccihome:8080/?sa=192.168.86.204&sp=8080",
+    "display": "standalone"
+}
