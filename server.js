@@ -10,7 +10,19 @@ var os = require('os')
 var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser');
+
+// set up ssl certificate
+// var fs = require('fs');
+// var https = require('https');
+//var privateKey = fs.readFileSync('private.key', 'utf8');
+//var certificate = fs.readFileSync('mysubdomain_mydomain_com.crt', 'utf8');
+//var credentials = {key: privateKey, cert: certificate};
+// var express = require('%HOME%/node-v0.10.2-linux-arm-pi/lib/node_modules/express');
+// var server = require('https').createServer(credentials, app);
+
 var server = require('http').createServer(app);
+
+
 var io = require('socket.io')(server);
 // var socket;
 var Gpio = require('onoff').Gpio;
